@@ -30,7 +30,7 @@ db_multirow forum_subs get_forum_subs {
 
 #  categories
 db_multirow category_subs get_category_subs {
-    select bcs.category_id, short_name as name, forum_id
+    select bcs.category_id, bc.short_name as name, bf.forum_id
       from bboard_category_subscribers bcs, bboard_categories bc, bboard_forums bf
       where bcs.category_id = bc.category_id
             and bcs.subscriber_id = :user_id
