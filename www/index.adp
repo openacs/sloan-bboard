@@ -17,7 +17,6 @@
     </if>
     <if @admin_p@ ne "0">
      [<a href="forum-edit?forum_id=@forums.forum_id@">edit</a>]
-     [<a href="forum-delete?forum_id=@forums.forum_id@">delete</a>]
     </if>
     <if @forums.charter@ ne "">
     <br />
@@ -33,6 +32,6 @@
 
 <if @admin_p@ ne 0>
  [<a href="forum-new">Create a @bboard_forum_name@</a>]
- [<a href="/permissions/one?object_id=@package_id@">Admin Permissions</a>]
+<!-- [<a href="/permissions/one?object_id=@package_id@">Admin Permissions</a>] -->
 </if>
 <p>

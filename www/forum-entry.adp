@@ -36,3 +36,5 @@
   </table>
  </blockquote>
 </form>
+
+<if @extra_footer@ not nil>@extra_footer@</if>

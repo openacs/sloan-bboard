@@ -33,4 +33,7 @@ set title "Edit a $bboard_forum_name"
 set action "forum-edit-2"
 set submit_label "Save Changes"
 
+set extra_footer "You can also <a href=\"forum-delete?forum_id=$forum_id\">delete this forum</a>."
+
+
 ad_return_template "forum-entry"

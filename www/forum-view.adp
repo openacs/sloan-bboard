@@ -106,5 +106,5 @@
 <if @admin_p@ eq "t">
  <h3>Admin</h3>
  [<a href="forum-move?forum_id=@forum_id@">Move messages to other <%= [bboard_forum_name] %></a>]
- [<a href="/permissions/one?object_id=@forum_id@">Set Permissions</a>]
+<!-- [<a href="/permissions/one?object_id=@forum_id@">Set Permissions</a>] -->
 </if>
