@@ -30,6 +30,12 @@ Response to <a href=message?forum_id=@forum_id@&message_id=@message.reply_to@>@r
 	 write_p="@message.write_p@" admin_p="@admin_p@"
          forum_id="@forum_id@" user_id="@message.user_id@" reply_p="f" new_p=@message.new_p@>
 </blockquote>
+ <center><form action="message-new">
+  <input type="hidden" name="forum_id" value="@forum_id@">
+  <input type="hidden" name="reply_to" value="@reply_to_message_id@">
+  <input type="submit" value="Post a reply">
+ </form></center>
+
 <if @replies:rowcount@ gt 0>
  <h3>Replies:</h3>
  <multiple name=replies>
@@ -46,9 +52,4 @@ Response to <a href=message?forum_id=@forum_id@&message_id=@message.reply_to@>@r
  </multiple>
 </if>
 
- <center><form action="message-new">
-  <input type="hidden" name="forum_id" value="@forum_id@">
-  <input type="hidden" name="reply_to" value="@reply_to_message_id@">
-  <input type="submit" value="Post a reply">
- </form></center>
 
