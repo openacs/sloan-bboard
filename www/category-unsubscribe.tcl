@@ -10,6 +10,7 @@ ad_page_contract {
     forum_id:integer,notnull
     category_id:integer,notnull,bboard_category_id
     {sub_page ""}
+    {return_url ""}
 }
 
 # Not strictly right
@@ -20,8 +21,12 @@ catch {
 	-category_id $category_id -subscriber_id [ad_verify_and_get_user_id]
 }
 
-if [empty_string_p $sub_page] {
-    ad_returnredirect "forum-by-category?category_id=$category_id&forum_id=$forum_id"
+if {[empty_string_p $return_url]} {
+    if [empty_string_p $sub_page] {
+        ad_returnredirect "forum-by-category?category_id=$category_id&forum_id=$forum_id"
+    } else {
+        ad_returnredirect "subscriptions"
+    }
 } else {
-    ad_returnredirect "subscriptions"
+    ad_returnredirect $return_url
 }
