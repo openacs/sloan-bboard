@@ -26,6 +26,7 @@ ad_page_contract {
 }
 
 set user_id [ad_verify_and_get_user_id]
+set package_id [ad_conn package_id]
 
 ad_require_permission $forum_id bboard_read_forum
 
@@ -36,6 +37,7 @@ db_1row forum_info {
           as category_create_p
       from bboard_forums
      where forum_id = :forum_id
+     and bboard_id= :package_id
 }
 
 set moderator_p 0

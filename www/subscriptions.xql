@@ -8,6 +8,7 @@
       from bboard_forum_subscribers bfs, bboard_forums bf
       where bfs.forum_id = bf.forum_id
             and bfs.subscriber_id = :user_id
+            and bf.bboard_id= :package_id
       order by forum_id asc
 
       </querytext>
@@ -18,9 +19,11 @@
       <querytext>
       
     select bcs.category_id, short_name as name, forum_id
-      from bboard_category_subscribers bcs, bboard_categories bc
+      from bboard_category_subscribers bcs, bboard_categories bc, bboard_forums bf
       where bcs.category_id = bc.category_id
             and bcs.subscriber_id = :user_id
+            and bc.forum_id = bf.forum_id
+            and bf.bboard_id= :package_id
       order by category_id asc
 
       </querytext>

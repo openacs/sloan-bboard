@@ -12,6 +12,7 @@
           as category_create_p
       from bboard_forums
      where forum_id = :forum_id
+        and bboard_id= :package_id
 
       </querytext>
 </fullquery>

@@ -13,6 +13,7 @@ ad_page_contract {
 
 ad_maybe_redirect_for_registration
 
+set package_id [ad_conn package_id]
 set user_id [ad_verify_and_get_user_id]
 
 # three sorts of subscriptions:
@@ -23,15 +24,18 @@ db_multirow forum_subs get_forum_subs {
       from bboard_forum_subscribers bfs, bboard_forums bf
       where bfs.forum_id = bf.forum_id
             and bfs.subscriber_id = :user_id
+            and bf.bboard_id= :package_id
       order by forum_id asc
 }
 
 #  categories
 db_multirow category_subs get_category_subs {
     select bcs.category_id, short_name as name, forum_id
-      from bboard_category_subscribers bcs, bboard_categories bc
+      from bboard_category_subscribers bcs, bboard_categories bc, bboard_forums bf
       where bcs.category_id = bc.category_id
             and bcs.subscriber_id = :user_id
+            and bc.forum_id = bf.forum_id
+            and bf.bboard_id= :package_id
       order by category_id asc
 }
 
@@ -40,8 +44,10 @@ db_multirow category_subs get_category_subs {
 
 db_multirow thread_subs get_thread_subs {
     select thread_id, title as name, forum_id
-      from bboard_thread_subscribers bts, bboard_messages_all bma
+      from bboard_thread_subscribers bts, bboard_messages_all bma, bboard_forums bf
       where bts.thread_id = bma.message_id
             and bts.subscriber_id = :user_id
+            and bma.forum_id= bf.forum_id
+            and bf.bboard_id= :package_id
       order by thread_id asc
 }
