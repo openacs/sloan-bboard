@@ -37,7 +37,7 @@ ad_page_contract {
 } -validate {
     content_html -requires {content mime_type} {
         if [string eq $mime_type "text/html"] {
-            set complaint [ad_check_for_naughty_html $content]
+            set complaint [ad_html_security_check $content]
             if ![empty_string_p $complaint] {
                 ad_complain $complaint
 		return 0
