@@ -2,7 +2,7 @@
 <property name="context_bar">@context_bar@</property>
 <property name="title">@bboard_forum_name_plural@</property>
 
-[<a href="subscriptions">Manage Subscriptions</a>]
+[<a href="subscriptions">Manage Email Alerts</a>]
 
 <if @forums:rowcount@ eq 0>
  <i>There are no @bboard_forum_name_plural@ available.</i><p>
