@@ -29,4 +29,7 @@ db_multirow forums forums_select {
     order by short_name
 }
 
+set bboard_forum_name [bboard_forum_name]
+set bboard_forum_name_plural [bboard_forum_name_plural]
+
 ad_return_template

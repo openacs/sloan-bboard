@@ -16,6 +16,10 @@ ad_page_contract {
 set mail_friend_p [ad_parameter "MailFriendEnabledP"]
 set attachments_p [ad_parameter "AttachmentsEnabledP"]
 
+if {![info exists new_p]} {
+    set new_p "f"
+}
+
 if {[ad_parameter "UserPostsDeletableP"] == "t"} {
     if [info exists write_p] {
 	set delete_p $write_p

@@ -28,7 +28,7 @@
      <td>@messages.the_score@</td>
     </if>
     <if @top_p@ not nil and @top_p@ ne 0>
-     <td><a href="<%=[bboard_message_url -top @messages.message_id@ @forum_id@]%>">@messages.title@</a></td>
+     <td><a href="<%=[bboard_message_url -top @messages.message_id@ @forum_id@]%>">@messages.title@</a> <if @messages.new_p@ not nil and @messages.new_p@ eq "t">(NEW!)</if></td>
     </if> 
     <else>
      <td><a href="<%=[bboard_message_url @messages.message_id@ @forum_id@]%>">@messages.title@</a></td>

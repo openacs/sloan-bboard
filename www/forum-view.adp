@@ -19,7 +19,7 @@
    [<a href="category-subscribe?category_id=@category_id@">Subscribe to Category</a>]
   </if>
   <else>
-   [<a href="forum-subscribe?forum_id=@forum_id@">Subscribe to Forum</a>]
+   [<a href="forum-subscribe?forum_id=@forum_id@">Subscribe to <%= [bboard_forum_name] %></a>]
   </else>
  </if>
  <else>
@@ -27,7 +27,7 @@
    You're subscribed to this category [<a href="category-unsubscribe?category_id=@category_id@">Unsubscribe</a>]
   </if>
   <else>
-   You're subscribed to this forum [<a href="forum-unsubscribe?forum_id=@forum_id@">Unsubscribe</a>]
+   You're subscribed to this <%= [bboard_forum_name] %> [<a href="forum-unsubscribe?forum_id=@forum_id@">Unsubscribe</a>]
   </else>
  </else>
 </td>
@@ -105,6 +105,6 @@
 
 <if @admin_p@ eq "t">
  <h3>Admin</h3>
- [<a href="forum-move?forum_id=@forum_id@">Move messages to other forum</a>]
+ [<a href="forum-move?forum_id=@forum_id@">Move messages to other <%= [bboard_forum_name] %></a>]
  [<a href="/permissions/one?object_id=@forum_id@">Set Permissions</a>]
 </if>

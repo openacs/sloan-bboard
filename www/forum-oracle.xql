@@ -23,7 +23,8 @@
       
 	select message_id, title, num_replies,
                first_names||' '||last_name as full_name,
-	       to_char(last_reply_date,'MM/DD/YY hh12:Mi am') as last_updated
+	       to_char(last_reply_date,'MM/DD/YY hh12:Mi am') as last_updated,
+               bboard_message.new_p(message_id, :user_id) as new_p
           from bboard_messages_all b, persons
           where forum_id = :forum_id
 	    and sent_date > case when :last_n_days = 0 then '1976-01-01' else to_char(sysdate - :last_n_days) end

@@ -11,7 +11,7 @@
     <td><input size="50" name="short_name" value="@short_name@"></td>
    </tr>
    <tr>
-    <th align="right">Forum Type:</th>
+    <th align="right"><%= [bboard_forum_name] %> Type:</th>
     <td><SELECT name=forum_type>
         <OPTION value=q-and-a>Q &amp; A
         <OPTION value=thread>Threaded

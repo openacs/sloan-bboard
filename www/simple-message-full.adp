@@ -7,6 +7,12 @@
    # (ben)
 %>
 
+<%
+if {$new_p == "t"} {
+        set title "$title (NEW!)"
+}
+%>
+
 <table border=0 width=100%>
 <tr>
 <td>
@@ -30,7 +36,8 @@ if {[info exists thread_depth]} {
     <b><i><a href="<%=[bboard_message_url @id@ @forum_id@]%>">@title@</a></i></b>
    </if>
    <else>
-    <b><i>@title@</i></b>
+    <b><i>@title@</i>
+</b>
    </else>
    &nbsp;
   </td>

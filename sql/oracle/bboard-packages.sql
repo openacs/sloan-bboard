@@ -171,6 +171,16 @@ as
         message_id   in bboard_messages_all.message_id%TYPE
     );
 
+    function new_p (
+        message_id  in bboard_messages_all.message_id%TYPE,
+        user_id     in users.user_id%TYPE
+    ) return char;
+
+    procedure mark_read (
+        message_id  in bboard_messages_all.message_id%TYPE,
+        user_id     in users.user_id%TYPE
+    );
+
 end bboard_message;
 /
 show errors
@@ -690,6 +700,64 @@ as
 
        acs_message.delete(message_id);
     end remove;
+
+
+    function new_p (
+        message_id  in bboard_messages_all.message_id%TYPE,
+        user_id     in users.user_id%TYPE
+    ) return char
+    is
+        v_track_new             char(1);
+        v_user_has_viewed_p     char(1);
+        v_newness_threshhold    date;
+        v_message_date          date;
+    begin
+        -- figure out if this forum tracks individual messages
+        select track_new_postings_p into v_track_new from bboard_forums where forum_id = (select forum_id from bboard_forum_message_map where message_id= new_p.message_id);
+
+        -- if it does, check if the user has viewed the message
+        if v_track_new ='t' then
+           v_user_has_viewed_p:= 'f';
+
+           select 't' into v_user_has_viewed_p from dual where exists
+           (select 1 from bboard_message_user_map where message_id= new_p.message_id and user_id= new_p.user_id);
+
+           return v_user_has_viewed_p;
+        end if;
+
+        -- otherwise, look up the user preference parameter for newness
+        -- currently hacked, cause no preference mechanism
+        select second_to_last_visit into v_newness_threshhold
+        from users where user_id= new_p.user_id;
+
+        -- calculate if the message is new according to the preference
+        select sent_date into v_message_date from acs_messages
+        where message_id= new_p.message_id;
+
+        if (v_message_date > v_newness_threshhold) then
+           return 't';
+        else
+           return 'f';
+        end if;
+    end new_p;
+
+    procedure mark_read (
+        message_id  in bboard_messages_all.message_id%TYPE,
+        user_id     in users.user_id%TYPE
+    )
+    is
+        v_track_new             char(1);
+    begin
+        -- figure out if this forum tracks individual messages
+        select track_new_postings_p into v_track_new from bboard_forums where forum_id = (select forum_id from bboard_forum_message_map where message_id= mark_read.message_id);
+
+        -- if it doesn't, stop here
+        if v_track_new = 't' then
+                insert into bboard_message_user_map
+                (message_id, user_id, view_date) values
+                (message_id, user_id, sysdate);
+        end if;
+    end mark_read;
 
 end bboard_message;
 /

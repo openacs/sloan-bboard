@@ -66,12 +66,15 @@ set title $forum_name
 
 set package_id [ad_conn package_id]
 
+set user_id [ad_conn user_id]
+
 if [string equal $moderated_p "f"] {
 
     db_multirow messages messages_select {
 	select message_id, title, num_replies,
                first_names||' '||last_name as full_name,
-	       to_char(last_reply_date,'MM/DD/YY hh12:Mi am') as last_updated
+	       to_char(last_reply_date,'MM/DD/YY hh12:Mi am') as last_updated,
+               bboard_message.new_p(message_id, :user_id) as new_p
           from bboard_messages_all b, persons
           where forum_id = :forum_id
 	    and sent_date > decode(:last_n_days, 0, '1976-01-01', sysdate - :last_n_days)

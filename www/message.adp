@@ -28,7 +28,7 @@ Response to <a href=message?forum_id=@forum_id@&message_id=@message.reply_to@>@r
          mime_type="@message.mime_type@" content="@message.content@"
          date="@message.pretty_date@" id="@message.message_id@"
 	 write_p="@message.write_p@" admin_p="@admin_p@"
-         forum_id="@forum_id@" user_id="@message.user_id@" reply_p="f">
+         forum_id="@forum_id@" user_id="@message.user_id@" reply_p="f" new_p=@message.new_p@>
 </blockquote>
 <if @replies:rowcount@ gt 0>
  <h3>Replies:</h3>
@@ -39,7 +39,7 @@ Response to <a href=message?forum_id=@forum_id@&message_id=@message.reply_to@>@r
 	   date="@replies.pretty_date@" id="@replies.message_id@" 
  	   write_p="@replies.write_p@" admin_p="@admin_p@"
            forum_id="@forum_id@" user_id=@replies.user_id@ reply_p=@replies_p@
-        thread_depth=@replies.thread_depth@>
+        thread_depth=@replies.thread_depth@ new_p=@replies.new_p@>
   <if @replies:rowcount@ ne @replies.rownum@>
   <include src="simple-message-separator-@presentation@">
   </if>

@@ -904,6 +904,16 @@ ad_proc -public bboard_user_view_pref {
     return "full"
 }
 
+ad_proc -public bboard_forum_name {
+} {
+    return "Bboard"
+}
+
+ad_proc -public bboard_forum_name_plural {
+} {
+    return "Bboards"
+}
+
 ad_proc -public bboard_alert_from_address {
 } {
     Returns an appropriate from address for bboard alerts.

@@ -18,10 +18,12 @@ ad_page_contract {
 
 ad_require_permission [ad_conn package_id] admin
 
-set context_bar {"Create a Forum"}
-set title "Create a Forum"
+set bboard_forum_name [bboard_forum_name]
+
+set context_bar [list "Create a $bboard_forum_name"]
+set title "Create a $bboard_forum_name"
 set action "forum-new-2"
-set submit_label "Create Forum"
+set submit_label "Create $bboard_forum_name"
 set short_name ""
 set charter ""
 set moderated_p "f"

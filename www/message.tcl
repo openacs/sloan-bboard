@@ -40,7 +40,7 @@ db_1row forum_short_name {
 }
 
 db_1row message_info {
-  select message_id, reply_to, title, 
+  select message_id, reply_to, title, bboard_message.new_p(message_id, :user_id) as new_p,
       to_char(sent_date, 'Month DD, YYYY HH:Mi am') as pretty_date, sender as user_id,
       mime_type, content, first_names||' '||last_name as full_name,
       acs_permission.permission_p(message_id, :user_id,
@@ -54,7 +54,7 @@ if {![empty_string_p $message(reply_to)]} {
     set reply_to $message(reply_to)
 
     db_1row reply_message_info {
-        select message_id, reply_to, title, 
+        select message_id, reply_to, title, bboard_message.new_p(message_id, :user_id) as new_p,
         to_char(sent_date, 'Month DD, YYYY HH:Mi am') as pretty_date, sender as user_id,
         mime_type, content, first_names||' '||last_name as full_name,
         acs_permission.permission_p(message_id, :user_id,
@@ -69,7 +69,7 @@ set context_bar [list [list "forum?[export_url_vars forum_id]" $forum_name] \
 		      "One Message"]
                    
 db_multirow replies message_replies {
-    select m.message_id, m.reply_to, m.title, m.mime_type, m.content, 
+    select m.message_id, m.reply_to, m.title, m.mime_type, m.content, bboard_message.new_p(m.message_id, :user_id) as new_p,
          to_char(m.sent_date,'Month DD, YYYY HH:Mi am') as pretty_date, sender as user_id,
          p.first_names||' '||p.last_name as full_name, 
          mt.depth - 1 as thread_depth, rownum,

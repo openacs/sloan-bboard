@@ -20,7 +20,7 @@
 <fullquery name="message_info">      
       <querytext>
       
-  select message_id, reply_to, title, 
+  select message_id, reply_to, title, bboard_message.new_p(message_id, :user_id) as new_p,
       to_char(sent_date, 'Month DD, YYYY HH:Mi am') as pretty_date, sender as user_id,
       mime_type, content, first_names||' '||last_name as full_name,
       acs_permission.permission_p(message_id, :user_id,
@@ -32,11 +32,26 @@
       </querytext>
 </fullquery>
 
+<fullquery name="reply_message_info">      
+      <querytext>
+      
+  select message_id, reply_to, title, bboard_message.new_p(message_id, :user_id) as new_p,
+      to_char(sent_date, 'Month DD, YYYY HH:Mi am') as pretty_date, sender as user_id,
+      mime_type, content, first_names||' '||last_name as full_name,
+      acs_permission.permission_p(message_id, :user_id,
+                                  'bboard_write_message') as write_p
+    from acs_messages_all m, persons p
+    where message_id = :reply_to
+      and person_id = sender
+
+      </querytext>
+</fullquery>
+
  
 <fullquery name="message_replies">      
       <querytext>
       
-    select m.message_id, m.reply_to, m.title, m.mime_type, m.content, 
+    select m.message_id, m.reply_to, m.title, m.mime_type, m.content, bboard_message.new_p(m.message_id, :user_id) as new_p,
          to_char(m.sent_date,'Month DD, YYYY HH:Mi am') as pretty_date, sender as user_id,
          p.first_names||' '||p.last_name as full_name, 
          mt.depth - 1 as thread_depth, rownum,
