@@ -16,18 +16,18 @@
 <td align="right">
  <if @subscribed_p@ eq 0>
   <if @category_id@ not nil>
-   [<a href="category-subscribe?category_id=@category_id@">Subscribe to Category</a>]
+   [<a href="category-subscribe?category_id=@category_id@">Add Alert for this Category</a>]
   </if>
   <else>
-   [<a href="forum-subscribe?forum_id=@forum_id@">Subscribe to <%= [bboard_forum_name] %></a>]
+   [<a href="forum-subscribe?forum_id=@forum_id@">Add Alert for this <%= [bboard_forum_name] %></a>]
   </else>
  </if>
  <else>
   <if @category_id@ not nil>
-   You're subscribed to this category [<a href="category-unsubscribe?category_id=@category_id@">Unsubscribe</a>]
+   You're subscribed to this category [<a href="category-unsubscribe?category_id=@category_id@">Remove Alert</a>]
   </if>
   <else>
-   You're subscribed to this <%= [bboard_forum_name] %> [<a href="forum-unsubscribe?forum_id=@forum_id@">Unsubscribe</a>]
+   You're subscribed to this <%= [bboard_forum_name] %> [<a href="forum-unsubscribe?forum_id=@forum_id@">Remove Alert</a>]
   </else>
  </else>
 </td>
