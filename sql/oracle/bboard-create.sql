@@ -138,6 +138,10 @@ create table bboard_forums (
             not null
         constraint bboard_forums_moderated_p_ck
             check (moderated_p in ('t','f')),
+    format  varchar(200) default 'q-and-a' 
+        constraint bboard_forums_format_nn not null
+        constraint bboard_forums_format_ck
+                   check (format in ('q-and-a','thread')),
     bboard_id integer
         constraint bboard_forums_bboard_id_nn
             not null
