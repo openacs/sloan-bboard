@@ -17,6 +17,7 @@
                 :short_name,
                 :charter,
                 :moderated_p,
+                :forum_type,
                 :bboard_id,
                 :context_id,
                 now(),

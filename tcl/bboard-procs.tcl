@@ -40,6 +40,7 @@ ad_page_contract_filter bboard_forum_id { name value } {
 ad_proc -public bboard_forum_new {
     {-forum_id ""}
     {-short_name:required}
+    {-forum_type "q-and-a"}
     {-charter ""}
     {-moderated_p f}
     {-bboard_id:required}
@@ -56,6 +57,7 @@ ad_proc -public bboard_forum_new {
                 short_name => :short_name,
                 charter => :charter,
                 moderated_p => :moderated_p,
+                forum_type => :forum_type,
                 bboard_id => :bboard_id,
                 context_id => :context_id,
                 creation_user => :creation_user,
@@ -90,7 +92,7 @@ ad_proc -public bboard_forum_set {
 ad_proc -public bboard_forum_get {
     {-forum_id:required}
     {-column_array:required}
-} {
+ } {
     Get the columns for a given forum into an array variable.
 } {
     upvar $rowvar row
@@ -883,6 +885,23 @@ ad_proc -public bboard_delete_attachment {
 	    end;
 	}
     }
+}
+
+# A new proc to figure out how a user wishes to see things
+ad_proc -public bboard_user_view_pref {
+    {-user_id ""}
+} {
+    Check what viewing preference a user has.
+    Implemented for dotLRN.
+    
+    @author ben@openforce.biz
+} {
+    if {[empty_string_p $user_id]} {
+        set user_id [ad_conn user_id]
+    }
+
+    # FIXME: fix this when we have real user preference tracking
+    return "summary"
 }
 
 ad_proc -public bboard_alert_from_address {

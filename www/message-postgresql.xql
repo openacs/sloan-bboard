@@ -9,7 +9,8 @@
     select short_name as forum_name,
        acs_permission__permission_p(:forum_id, :user_id, 'admin') as admin_p,
        acs_permission__permission_p(:forum_id, :user_id, 'bboard_moderate_forum') 
-         as moderate_p
+         as moderate_p,
+      forum_type
       from bboard_forums
       where forum_id = :forum_id
 

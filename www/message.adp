@@ -21,7 +21,7 @@
 
 <h3>Message:</h3>
 <blockquote>
-<include src="simple-message" title="@message.title@" author="@message.full_name@"
+<include src="simple-message-full" title="@message.title@" author="@message.full_name@"
          mime_type="@message.mime_type@" content="@message.content@"
          date="@message.pretty_date@" id="@message.message_id@"
 	 write_p="@message.write_p@" admin_p="@admin_p@"
@@ -36,22 +36,28 @@ if {$replies(thread_depth) > $prev_depth} {
         template::adp_puts "<blockquote>"
 }
 if {$replies(thread_depth) < $prev_depth} {
-        template::adp_puts "</blockquote>"
+        for {set i $prev_depth} {$i > $replies(thread_depth)} {incr i -1} {
+                template::adp_puts "</blockquote>"
+        }
 }
 set prev_depth $replies(thread_depth)
 %>
-  <blockquote>
   <a name="@replies.message_id@">
-  <include src="simple-message-summary" title="@replies.title@" author="@replies.full_name@"
+  <include src="simple-message-@presentation@" title="@replies.title@" author="@replies.full_name@"
            mime_type="@replies.mime_type@" content="@replies.content@"
 	   date="@replies.pretty_date@" id="@replies.message_id@" 
  	   write_p="@replies.write_p@" admin_p="@admin_p@"
-           forum_id="@forum_id@" user_id=@replies.user_id@ reply_p=1>
-  </blockquote>
+           forum_id="@forum_id@" user_id=@replies.user_id@ reply_p=@replies_p@>
   <if @replies:rowcount@ ne @replies.rownum@>
-   <hr width="60%"/>
+  <include src="simple-message-separator-@presentation@">
   </if>
  </multiple>
+<%
+# We have to close the blockquotes (ben)
+for {set i $prev_depth} {$i > 0} {incr i -1} {
+        template::adp_puts "</blockquote>"
+}
+%>
 </if>
 
  <center><form action="message-new">

@@ -14,6 +14,7 @@ ad_page_contract {
     forum_id:integer,notnull
     short_name:notnull,trim
     charter:trim
+    forum_type:notnull,trim
     {moderated_p:optional ""}
 }
 
@@ -30,6 +31,7 @@ set package_id [ad_conn package_id]
 db_transaction {
     bboard_forum_new -forum_id $forum_id -short_name $short_name \
 	    -charter $charter -moderated_p $moderated_p \
+            -forum_type $forum_type \
 	    -bboard_id $package_id -creation_user [ad_verify_and_get_user_id] \
 	    -creation_ip [ad_conn peeraddr] -context_id $package_id
 }

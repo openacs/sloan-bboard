@@ -10,6 +10,13 @@
     <th align="right">Short Name:</th>
     <td><input size="50" name="short_name" value="@short_name@"></td>
    </tr>
+   <tr>
+    <th align="right">Forum Type:</th>
+    <td><SELECT name=forum_type>
+        <OPTION value=q-and-a>Q &amp; A
+        <OPTION value=thread>Threaded
+        </SELECT>
+    </td>
    <tr valign="top">
     <th align="right"><br>Charter (optional):</td>
     <td><textarea name="charter" rows="20" cols="50"><%= [ns_quotehtml $charter] %></textarea></td>

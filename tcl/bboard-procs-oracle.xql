@@ -23,6 +23,7 @@
                 short_name => :short_name,
                 charter => :charter,
                 moderated_p => :moderated_p,
+                forum_type => :forum_type,
                 bboard_id => :bboard_id,
                 context_id => :context_id,
                 creation_user => :creation_user,

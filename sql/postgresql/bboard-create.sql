@@ -154,6 +154,13 @@ create table bboard_forums (
             not null
         constraint bboard_forums_moderated_p_ck
             check (moderated_p in ('t','f')),
+    forum_type  varchar(200) default 'q-and-a' 
+        constraint bboard_forums_forum_type_nn not null
+        constraint bboard_forums_forum_type_ck
+                   check (forum_type in ('q-and-a','thread')),
+    track_new_postings_p   char(1) default 'f'
+        constraint bboard_forums_track_new_ck
+                   check (track_new_postings_p in ('t','f')),
     bboard_id integer
         constraint bboard_forums_bboard_id_nn
             not null
@@ -190,6 +197,24 @@ create index bboard_fmm_message_id_idx
 
 create index bboard_fmm_status_idx
     on bboard_forum_message_map (status);
+
+--
+-- For tracking individual views on messages
+-- (This is a client request, but I still think this will be problematic - ben)
+--
+create table bboard_message_user_map (
+       message_id integer
+          constraint bboard_mum_message_id_fk
+            references acs_messages (message_id)
+            on delete cascade,
+       user_id integer
+          constraint bboard_mum_user_id_fk
+            references users (user_id)
+            on delete cascade,
+       view_date date default now()
+          constraint bboard_mum_view_date_nn
+          not null
+);
 
 -- bboard categories
 --

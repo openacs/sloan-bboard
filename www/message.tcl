@@ -33,7 +33,8 @@ db_1row forum_short_name {
     select short_name as forum_name,
        acs_permission.permission_p(:forum_id, :user_id, 'admin') as admin_p,
        acs_permission.permission_p(:forum_id, :user_id, 'bboard_moderate_forum') 
-         as moderate_p
+         as moderate_p,
+      forum_type
       from bboard_forums
       where forum_id = :forum_id
 }
@@ -71,6 +72,16 @@ db_multirow replies message_replies {
                                      from bboard_forum_message_map bfmm
                                      where bfmm.forum_id = :forum_id)
 order by mt.seqnum
+}
+
+# How does a user want this presented
+set presentation [bboard_user_view_pref]
+
+# Should we allow replies to replies?
+if {$forum_type == "thread"} {
+    set replies_p 1
+} else {
+    set replies_p 0
 }
 
 ad_return_template

@@ -27,20 +27,21 @@ end;
 ' language 'plpgsql';
 
 
-create function bboard_forum__new (integer, varchar, varchar, char, integer,
-                            integer, timestamp, integer, varchar, varchar)
+create function bboard_forum__new (integer, varchar, varchar, char, varchar,
+                    integer, integer, timestamp, integer, varchar, varchar)
 returns integer as '
 declare
     p_forum_id      alias for $1;         -- default null
     p_short_name    alias for $2;
     p_charter       alias for $3;         -- default null
     p_moderated_p   alias for $4;         -- default ''f''
-    p_bboard_id     alias for $5;
-    p_context_id    alias for $6;         -- default null
-    p_creation_date alias for $7;         -- default now()
-    p_creation_user alias for $8;         -- default null
-    p_creation_ip   alias for $9;         -- default null
-    p_object_type   alias for $10;        -- default ''bboard_forum''
+    p_forum_type    alias for $5;
+    p_bboard_id     alias for $6;
+    p_context_id    alias for $7;         -- default null
+    p_creation_date alias for $8;         -- default now()
+    p_creation_user alias for $9;         -- default null
+    p_creation_ip   alias for $10;         -- default null
+    p_object_type   alias for $11;        -- default ''bboard_forum''
     v_context_id  integer;
     v_forum_id    integer;
 begin
@@ -55,8 +56,8 @@ begin
     );
 
     insert into bboard_forums
-               (forum_id, short_name, charter, moderated_p, bboard_id)
-        values (v_forum_id, p_short_name, p_charter, p_moderated_p, p_bboard_id);
+               (forum_id, short_name, charter, moderated_p, forum_type, bboard_id)
+        values (v_forum_id, p_short_name, p_charter, p_moderated_p, p_forum_type, p_bboard_id);
     return v_forum_id;   
 end;
 ' language 'plpgsql';

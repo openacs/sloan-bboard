@@ -19,7 +19,7 @@ as
         short_name    in bboard_forums.short_name%TYPE,
         charter       in bboard_forums.charter%TYPE     default null,
         moderated_p   in bboard_forums.moderated_p%TYPE default 'f',
-        format        in bboard_forums.format%TYPE      default 'q-and-a',
+        forum_type    in bboard_forums.forum_type%TYPE      default 'q-and-a',
         bboard_id     in bboard_forums.bboard_id%TYPE,
         context_id    in acs_objects.context_id%TYPE    default null,
         creation_date in acs_objects.creation_date%TYPE default sysdate,
@@ -202,7 +202,7 @@ as
         short_name    in bboard_forums.short_name%TYPE,
         charter       in bboard_forums.charter%TYPE     default null,
         moderated_p   in bboard_forums.moderated_p%TYPE default 'f',
-        format        in bboard_forums.format%TYPE      default 'q-and-a',
+        forum_type    in bboard_forums.forum_type%TYPE      default 'q-and-a',
         bboard_id     in bboard_forums.bboard_id%TYPE,
         context_id    in acs_objects.context_id%TYPE    default null,
         creation_date in acs_objects.creation_date%TYPE default sysdate,
@@ -224,8 +224,8 @@ as
             object_type   => object_type
         );
         insert into bboard_forums
-                   (forum_id, short_name, charter, moderated_p, format, bboard_id)
-            values (v_forum_id, short_name, charter, moderated_p, format, bboard_id);
+                   (forum_id, short_name, charter, moderated_p, forum_type, bboard_id)
+            values (v_forum_id, short_name, charter, moderated_p, forum_type, bboard_id);
         return v_forum_id;   
     end new;
 
