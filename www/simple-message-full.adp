@@ -2,6 +2,24 @@
    # This should, in the future, use a row variable rather than many
    # single values, but row variables are not yet supported. %>
 
+<%
+   # The first table is just for thread spacing purposes
+   # (ben)
+%>
+
+<table border=0 width=100%>
+<tr>
+<td>
+<%
+if {[info exists thread_depth]} {
+        for {set i 0} {$i < $thread_depth} {incr i} {
+                template::adp_puts "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+        }
+}
+%>
+</td>
+<td>
+
 <table cellspacing="0" cellpadding="3" border="0" width="90%">
  <tr bgcolor="#ECECEC">
   <if @headings_p@ not nil and @headings_p@ ne "f">
@@ -72,4 +90,8 @@
   </if>
  </if>
 </if>
+</table>
+
+</td>
+</tr>
 </table>

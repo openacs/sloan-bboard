@@ -18,51 +18,37 @@
  </else>
 </td></tr></table>
 
-
+<if @message.reply_to@ not nil>
+<p>
+Response to <a href=message?forum_id=@forum_id@&message_id=@message.reply_to@>@reply_to_message.title@</a>
+</if>
 <h3>Message:</h3>
 <blockquote>
 <include src="simple-message-full" title="@message.title@" author="@message.full_name@"
          mime_type="@message.mime_type@" content="@message.content@"
          date="@message.pretty_date@" id="@message.message_id@"
 	 write_p="@message.write_p@" admin_p="@admin_p@"
-         forum_id="@forum_id@" user_id="@message.user_id@" reply_p="1">
+         forum_id="@forum_id@" user_id="@message.user_id@" reply_p="f">
 </blockquote>
 <if @replies:rowcount@ gt 0>
  <h3>Replies:</h3>
-<% set prev_depth 0 %>
  <multiple name=replies>
-<%
-if {$replies(thread_depth) > $prev_depth} {
-        template::adp_puts "<blockquote>"
-}
-if {$replies(thread_depth) < $prev_depth} {
-        for {set i $prev_depth} {$i > $replies(thread_depth)} {incr i -1} {
-                template::adp_puts "</blockquote>"
-        }
-}
-set prev_depth $replies(thread_depth)
-%>
   <a name="@replies.message_id@">
   <include src="simple-message-@presentation@" title="@replies.title@" author="@replies.full_name@"
            mime_type="@replies.mime_type@" content="@replies.content@"
 	   date="@replies.pretty_date@" id="@replies.message_id@" 
  	   write_p="@replies.write_p@" admin_p="@admin_p@"
-           forum_id="@forum_id@" user_id=@replies.user_id@ reply_p=@replies_p@>
+           forum_id="@forum_id@" user_id=@replies.user_id@ reply_p=@replies_p@
+        thread_depth=@replies.thread_depth@>
   <if @replies:rowcount@ ne @replies.rownum@>
   <include src="simple-message-separator-@presentation@">
   </if>
  </multiple>
-<%
-# We have to close the blockquotes (ben)
-for {set i $prev_depth} {$i > 0} {incr i -1} {
-        template::adp_puts "</blockquote>"
-}
-%>
 </if>
 
  <center><form action="message-new">
   <input type="hidden" name="forum_id" value="@forum_id@">
-  <input type="hidden" name="reply_to" value="@message_id@">
+  <input type="hidden" name="reply_to" value="@reply_to_message_id@">
   <input type="submit" value="Post a reply">
  </form></center>
 

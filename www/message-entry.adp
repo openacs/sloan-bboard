@@ -14,7 +14,7 @@
     <tr>
      <th align="right" valign="top">In Reply To:</td>
      <td>
-      <include src="simple-message" title="@quote.title@" author="@quote.full_name@"
+      <include src="simple-message-full" title="@quote.title@" author="@quote.full_name@"
                date="@quote.sent_date@" mime_type="@quote.mime_type@" forum_id="@forum_id@"
 	       content="@quote.content@" display_attach_p="f">
       <br />

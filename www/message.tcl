@@ -50,6 +50,21 @@ db_1row message_info {
       and person_id = sender
 } -column_array message
 
+if {![empty_string_p $message(reply_to)]} {
+    set reply_to $message(reply_to)
+
+    db_1row reply_message_info {
+        select message_id, reply_to, title, 
+        to_char(sent_date, 'Month DD, YYYY HH:Mi am') as pretty_date, sender as user_id,
+        mime_type, content, first_names||' '||last_name as full_name,
+        acs_permission.permission_p(message_id, :user_id,
+        'bboard_write_message') as write_p
+        from acs_messages_all m, persons p
+        where message_id = :reply_to
+        and person_id = sender
+    } -column_array reply_to_message
+}
+    
 set context_bar [list [list "forum?[export_url_vars forum_id]" $forum_name] \
 		      "One Message"]
                    
@@ -79,9 +94,15 @@ set presentation [bboard_user_view_pref]
 
 # Should we allow replies to replies?
 if {$forum_type == "thread"} {
-    set replies_p 1
+    set replies_p t
+    set reply_to_message_id $message(message_id)
 } else {
-    set replies_p 0
+    set replies_p f
+    if {[empty_string_p $message(reply_to)]} {
+        set reply_to_message_id $message(message_id)
+    } else {
+        set reply_to_message_id $message(reply_to)
+    }
 }
 
 ad_return_template

@@ -901,7 +901,7 @@ ad_proc -public bboard_user_view_pref {
     }
 
     # FIXME: fix this when we have real user preference tracking
-    return "summary"
+    return "full"
 }
 
 ad_proc -public bboard_alert_from_address {

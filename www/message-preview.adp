@@ -4,7 +4,7 @@
 
 <form action="@target@" method="POST">
  @form_vars@
- <include src="simple-message" title="@title@" headings_p="t"
+ <include src="simple-message-full" title="@title@" headings_p="t"
           content="@content@" mime_type="@msg_mime_type@">
  <br>
  <blockquote><input type="submit" value="Confirm">
