@@ -17,10 +17,10 @@
         <OPTION value=thread>Threaded
         </SELECT>
     </td>
-   <tr valign="top">
+   <!--<tr valign="top">
     <th align="right"><br>Charter (optional):</td>
     <td><textarea name="charter" rows="20" cols="50"><%= [ns_quotehtml $charter] %></textarea></td>
-   </tr>
+   </tr>-->
    <tr>
     <th align="right">Moderated:</td>
     <if @moderated_p@ eq "t">

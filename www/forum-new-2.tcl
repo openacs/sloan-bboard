@@ -13,7 +13,7 @@ ad_page_contract {
 } {
     forum_id:integer,notnull
     short_name:notnull,trim
-    charter:trim
+    {charter ""}
     forum_type:notnull,trim
     {moderated_p:optional ""}
 }
