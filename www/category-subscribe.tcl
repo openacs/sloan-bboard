@@ -35,7 +35,7 @@ ad_require_permission $forum_id bboard_create_message
 
 catch {
     bboard_subscribe_category \
-	-category_id $category_id -subscriber_id [ad_verify_and_get_user_id]
+	-category_id $category_id -subscriber_id [ad_conn user_id]
 }
 
 ad_returnredirect "forum-by-category?forum_id=$forum_id&category_id=$category_id"

@@ -34,7 +34,7 @@ if {[ad_parameter "UserPostsDeletableP"] == "t"} {
     ad_require_permission $message_id admin
 }
 
-set user_id [ad_verify_and_get_user_id]
+set user_id [ad_conn user_id]
 
 if [string eq $replies ""] {
     bboard_message_set_status -message_id $message_id -forum_id $forum_id \

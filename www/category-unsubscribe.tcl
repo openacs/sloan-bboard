@@ -34,7 +34,7 @@ ad_require_permission $forum_id bboard_create_message
 
 catch {
     bboard_unsubscribe_category \
-	-category_id $category_id -subscriber_id [ad_verify_and_get_user_id]
+	-category_id $category_id -subscriber_id [ad_conn user_id]
 }
 
 if {[empty_string_p $return_url]} {

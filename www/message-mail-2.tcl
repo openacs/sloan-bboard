@@ -35,7 +35,7 @@ ad_page_contract {
 
 ad_require_permission $forum_id bboard_create_message
 
-set user_id [ad_verify_and_get_user_id]
+set user_id [ad_conn user_id]
 set creation_ip [ad_conn peeraddr]
 
 db_transaction {

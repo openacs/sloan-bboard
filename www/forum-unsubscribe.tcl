@@ -30,7 +30,7 @@ ad_page_contract {
 
 catch {
     bboard_unsubscribe_forum \
-	-forum_id $forum_id -subscriber_id [ad_verify_and_get_user_id]
+	-forum_id $forum_id -subscriber_id [ad_conn user_id]
 }
 
 if {[empty_string_p $return_url]} {

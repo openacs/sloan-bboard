@@ -32,7 +32,7 @@ ad_require_permission $forum_id bboard_create_message
 
 catch {
     bboard_subscribe_thread \
-	-thread_id $message_id -subscriber_id [ad_verify_and_get_user_id]
+	-thread_id $message_id -subscriber_id [ad_conn user_id]
 }
 
 ad_returnredirect "[bboard_message_page]?forum_id=$forum_id&message_id=$message_id"

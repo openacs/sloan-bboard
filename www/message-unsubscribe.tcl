@@ -31,7 +31,7 @@ ad_page_contract {
 
 catch {
     bboard_unsubscribe_thread \
-	-thread_id $message_id -subscriber_id [ad_verify_and_get_user_id]
+	-thread_id $message_id -subscriber_id [ad_conn user_id]
 }
 
 if {[empty_string_p $return_url]} {

@@ -60,7 +60,7 @@ ad_page_contract {
 ns_log Notice "mime_type is $mime_type"
 set subscribe_p 1
 
-set user_id [ad_verify_and_get_user_id]
+set user_id [ad_conn user_id]
 
 ad_require_permission $forum_id bboard_create_message
 

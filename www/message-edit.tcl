@@ -77,7 +77,7 @@ set context_bar \
 	[list [list "forum?[export_url_vars forum_id]" $forum_name] \
               "Edit a Message"]
 
-set user_id [ad_verify_and_get_user_id]
+set user_id [ad_conn user_id]
 
 set category_pulldown_list ""
 

@@ -32,7 +32,7 @@ ad_page_contract {
     title:onevalue
 }
 
-set user_id [ad_verify_and_get_user_id]
+set user_id [ad_conn user_id]
 
 set title "Search Results for \"$query\""
 set context_bar [list "Search"]

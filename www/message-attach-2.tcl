@@ -33,7 +33,7 @@ ad_page_contract {
 ad_require_permission $message_id bboard_write_message
 
 # authenticate the user
-set user_id [ad_verify_and_get_user_id]
+set user_id [ad_conn user_id]
 
 # aolserver will give us a guessed mime type for the upload
 set guessed_file_type [ns_guesstype $upload_file]

@@ -33,7 +33,7 @@ ad_page_contract {
     messages:multirow
 }
 
-set current_user_id [ad_verify_and_get_user_id]
+set current_user_id [ad_conn user_id]
 
 ad_require_permission $forum_id bboard_read_forum
 
