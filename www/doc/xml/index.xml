@@ -1,0 +1,66 @@
+<?xml version='1.0' ?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+	       "http://developer.arsdigita.com/docbook/dtd/4.1.2/docbookx.dtd" [
+
+<!-- For Everyone -->
+<!ENTITY introduction SYSTEM "intro.xml">
+<!ENTITY support SYSTEM "support.xml">
+<!ENTITY notes SYSTEM "notes.xml"> 
+
+<!-- For Admins -->
+<!ENTITY installation SYSTEM "installation.xml"> 
+<!ENTITY configuration SYSTEM "configuration.xml">
+
+<!-- For Developers -->
+<!ENTITY design SYSTEM "design.xml">
+<!ENTITY requirements SYSTEM "requirements.xml">
+
+
+]>
+
+<book>
+<title>Bboard Documentation</title>
+
+
+        <chapter id="for-everyone">
+        <title>For Everyone</title>
+
+            <sect1>
+            <title>Overview</title>
+                <para>Brief introduction, support possibilities and release notes</para>
+            </sect1>
+
+            &introduction;
+            &support;
+<!--            &notes;
+-->
+        </chapter>
+
+   
+        <chapter id="for-admins" xreflabel="For Admins">
+        <title>For Admins</title>
+
+            <sect1>
+            <title>Overview</title>
+            <para>Installation, maintenance</para>
+            </sect1>
+
+            &installation;
+            &configuration;
+
+        </chapter>
+
+       <chapter id="for-developers" xreflabel="For Developers">
+       <title>For Developers</title>
+
+            <sect1>
+            <title>Overview</title>
+            <para>Requirements, design</para>
+            </sect1>
+
+            &requirements;
+            &design;
+
+        </chapter>
+
+</book>

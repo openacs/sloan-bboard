@@ -1,0 +1,225 @@
+<html>
+<head><title>BBoard documentation</title></head>
+<body bgcolor=#ffffff>
+<h2>BBoard documentation</h2>
+<hr>
+<h3>Release Notes</h3>
+
+Version 4.0.2b6 of BBoard is Yet Another Attempt to get 4.0.2
+released.  This version requires ACS 4.0.1 but has been tested against
+4.1 as well.  A lot of bugs have been fixed and minor features implemented:
+
+<ul>
+<li> emailing a friend or email alerts should no longer leave persistent garbage around.
+<li> a link is now provided for uncategorized messages.
+<li> cleaner views
+<li> deletion of threads as well as just messages
+<li> email alerts show a link to the message and indicate which forum they came from
+</ul>
+
+For improved functionality you should upgrade to the latest version of
+ACS 4.1 and the latest version of ACS Messaging (as of 2/13/01 4.1.1
+NOT included in ACS 4.1). <p>
+
+For more details on bugfixes and improvements, visit the bboard
+section of the <a
+href="http://www.arsdigita.com/sdm/all-tickets?module_id=8566&package_id=8157&status=newopen">ArsDigita
+SDM</a>.<p>
+
+<strong>Note:</strong> This documentation has not been reviewed and is
+not considered up to standards.  More comprehensive and more refined
+documentation will be available in an upcoming point release.  If you
+have further questions, feel free to ask on the <a
+href="http://www.arsdigita.com/bboard/q-and-a?topic_id=935&topic=ACS%20Applications">applications
+bboard</a>.<p>
+
+
+<h3>Overview</h3>
+
+BBoard implements a system for persistent asynchronous web based
+discussions.  A BBoard instance as configured from ACS-Admin can
+contain some number for discussion forums.  Each forums provides a
+context for users with appropriate access to read and post messages.
+Messages may optionally be tagged in a list categories to facilitate
+sorting and searching.
+
+<h3>Installation</h3>
+
+Using bboard requires an operating ACS 4.0.1 installation.  If you
+haven't upgraded, do so first!  Installing and enabling the bboard
+package should be relatively painless: just go to your server's
+/acs-admin/apm/package-load page and enter
+"http://www.arsdigita.com/acs-repository/download/apm/bboard-4.0.2r1.apm".
+If you're reading this on your own server, you've already done
+this.<p>
+
+Once the package is installed and enabled, a subsite administrator can
+then mount instances on their subsite.  If you're the lone
+&uuml;ber-admin of your site, you can just go to your site's
+/admin/site-nodes/ page and create a new subfolder under the "/"
+directory.  Pick a creative label for your subfolder like "bboard" or
+"dg".  Select "new application" for that subfolder, and choose BBoard
+from the pulldown menu.  It is probably best to label the application
+instance the same as your subfolder; do otherwise if it helps you keep
+your site straight.<p>
+
+At this point you should have a BBoard instance mounted in the
+subfolder directory, let's say you chose "/bboard".  Before delving
+into configuration, let's run over BBoard's permissions model.
+
+<h3>Initial Configuration</h3>
+
+Once mounted, you can surf over to /bboard as an administrator, create
+some forums, and start discussing that crazy U.S. election!
+
+The following parameters are configurable on a package instance basic from the
+appropirate node in /admin/site-nodes/. 
+
+<dl>
+
+<dt><strong><code>ThreadingEnabledP</code></strong>
+
+<dd>This enables or disables threading indentation on a single thread
+basis.  "t" enables threading and "f" (the default) turns it off.
+
+<dt><strong><code>MailFriendEnabledP</code></strong>
+
+<dd>This enables the option for users to mail copies of a bboard
+posting to a friend (or themselves).  Since this functionality can be
+abused, consider disabling the functionality.
+
+<dt><strong><code>UserPostsEditableP</code></strong>
+
+<dd>This grants users privileges to edit their own message.  Note:
+toggling this parameter will not change the ability of user to edit
+existing messages.  This parameter only effects whether users are
+granted rights to edit at the message's posting time.  This must be
+enabled for attachments to work.
+
+<dt><strong><code>AttachmentsEnabledP</code></strong>
+
+<dd>This lets users who have edit capability on a message upload file
+or image attachments.
+
+<dt><strong><code>MaxAttachmentSize</code></strong>
+
+<dd>This specifies the maximum size in bytes to accept for binary
+attachments.  The default is 1 megabyte.
+
+<dt><strong><code>DisplayLastNDays</code></strong>
+
+<dd>This parameter controls how many days worth of recent messages are
+displayed on the forum overview page by default.  0 specifies
+that all messages should be displayed.
+
+</dl>
+
+<h3>Advanced Configuration and Permissions Overview</h3>
+
+The ACS 4.0 permissions system is about hierarchies and in particular
+hiearchical containment.  There are three important hiearchies: the
+user hierarchy (users, groups, and parties), the object hierarchy
+(objects nested in the contexts of others), and the privilege hiearchy
+(privileges can entail other entails).  This complexity of mechanism
+is designed to allow for simplicity of use for programmers and
+administrators.  Unfortunately, interfaces to facilitate this
+simplicity of use are not here yet.  Until then, sophisticated control
+and configuration of BBoard necessitates an understanding of these
+details.<p>
+
+The first hierarchy is straightforward.  There are users and groups
+(or together parties).  Privileges granted to groups inherit to their
+members.<p>
+
+Unless explicitly disabled (see below), privileges granted to parties
+are inherited down an object hierarchy.  The nature of the BBoard
+hierarchy is as follows: subsites contain bboard package instances;
+bboard package instances contain forums; forums contain both
+categories and messages.  Privileges granted to parties on the package
+instance are inherited to all the forums nested within and so on.<p>
+
+The third hiearchy is the least clear.  Privileges can be nested into
+other privileges.  This lets us group related privileges like those
+for reading a message and reading a forum together to allow us to
+easily grant "read access" on a hiearchy of objects to a party even
+though there are separate notions of "read a message" and "read a
+forum".  All the bboard privileges are nested in one of the following
+system level "super"-privileges: "read", "write", "create", "delete",
+and "admin".<p>
+
+The full set of self explanatory bboard privileges is listed here:
+<ul>
+ <li> bboard_create_forum
+ <li> bboard_create_category
+ <li> bboard_create_message
+ <li> bboard_write_forum
+ <li> bboard_write_category
+ <li> bboard_write_message
+ <li> bboard_read_forum
+ <li> bboard_read_category
+ <li> bboard_read_message
+ <li> bboard_delete_forum
+ <li> bboard_delete_category
+ <li> bboard_delete_message
+ <li> bboard_moderate_forum
+</ul>
+
+
+Permissions on package instances are controlled through the "set
+permissions" options on the appropriate folder in the admin site map
+(/admin/site-map/).  While in principal, the system should allow you
+to grant permissions on lower level objects like forums or even
+individual messages and categories, right now the UI is limited to
+granting permissions on the application instance.  SQL*Plus users or
+even URL hackers can probably figure out how to do this if they're so
+inclined. <p>
+
+The default set of permissions granted in a bboard system are those
+inherited from the main site:
+
+<ul>
+ <li> Registered Users have bboard_create_message 
+ <li> The Public has bboard_read_category 
+ <li> The Public has bboard_read_forum 
+ <li> The Public has bboard_read_message 
+ <li> The Public has read 
+ <li> [Admin user] admin 
+</ul>
+
+Granting additional privileges to parties is fairly straightforward.
+For moderated forums, creating a moderators group and granting them
+"bboard_moderate_forum" (or "admin" if you're feeling lucky) will let
+you delegate more of the discussion culling.<p>
+
+For significantly different configurations you might need to revoke
+privileges already granted by the defaults.  In this case you must
+configure the package instance not to inherit permissions from the
+main site and then add back any permissions needed.  Granting "read"
+to registered users and bboard_create_message to "Elite d00ds" will
+give you a pseudo-private forum.<p>
+
+Note: To facilitate usability in the common case, BBoard pages present
+the option to post or reply even if the user doesn't have the
+bboard_create_message privilege.  If you remove posting ability from
+registered users, you may wish to alter the templates to appropriately
+display options.<p>
+
+<h3>Miscellaneous Notes</h3>
+
+Text searching requires the maintaince of the content repository
+<code>cr_rev_content_index</code> index; either by hand or by
+context.</p>
+
+As usual, please file bugs and feature requests in the <a
+href="http://www.arsdigita.com/sdm/one-module?module_id=3701">bboard
+SDM</a>.
+
+<h3>Engineering Documentss</h3>
+<ul>
+<li><a href="requirements.html">Requirements</a>
+<li><a href="design.html">Design</a> <font color="red">[out of date]</font>
+</ul>
+
+<hr>
+<address>akk@arsdigita.com</address></body>
+</html>

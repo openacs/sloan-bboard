@@ -1,0 +1,57 @@
+<sect1 id="support" xreflabel="Bboard Support">
+<title>Support</title>
+
+<para>
+There's a couple of different places you can turn to if this documentation 
+comes short of answers to your questions or if you want to give us 
+feedback:
+</para>
+
+<itemizedlist>
+<listitem><para>
+<emphasis role="strong">
+If you have a general question about usage of the application
+</emphasis></para>
+
+<para> 
+Ask on the <ulink url="http://www.arsdigita.com/bboard/q-and-a?topic_id=935&amp;topic=ACS%20Applications">
+applications bboard at arsdigita.com</ulink>.
+</para>
+</listitem>
+
+<listitem><para>
+<emphasis role="strong">
+If you want to report a bug or keep up-to-date on bug fixes
+</emphasis></para>
+
+<para>
+Visit the <ulink url="http://www.arsdigita.com/sdm/all-tickets?module_id=8566&amp;package_id=8157&amp;status=newopen">
+ArsDigita SDM</ulink>.
+</para>
+</listitem>
+
+<listitem><para>
+<emphasis role="strong">
+If you are interested in the general status of the Bboard application
+</emphasis></para>
+
+<para>
+Up to date info on BBoard is available from the <ulink url="http://acs40.arsdigita.com/acs40-project-central/bboard/">BBoard status
+page</ulink>.
+</para>
+</listitem>
+
+<listitem><para>
+<emphasis role="strong">
+If you have questions, comments or suggestions to this documentation
+</emphasis></para>
+
+<para>
+Visit the <ulink url="http://developer.arsdigita.com/docbook/">Documentation Central</ulink>
+or fire directly at <ulink url="mailto:acs-docs@arsdigita.com">acs-docs@ardigita.com</ulink>.
+</para>
+</listitem>
+</itemizedlist>
+
+
+</sect1>

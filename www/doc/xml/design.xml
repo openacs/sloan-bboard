@@ -1,0 +1,352 @@
+<sect1 id="design" xreflabel="Bboard Design Document">
+<title>ACS Messaging &amp; BBoard Design Document</title>
+
+
+<sect2 id="design-essentials">
+<title>Essentials</title>
+
+
+<itemizedlist>
+<listitem><para>User directory: <ulink url="/bboard/">/bboard/</ulink></para></listitem>
+
+<listitem><para><xref linkend="requirements"/></para></listitem>
+
+<listitem><para>Data model: <ulink url="/doc/sql/display-sql?url=bboard-create.sql&amp;package_key=bboard">bboard-create.sql</ulink>
+
+<ulink url="/doc/sql/display-sql?url=acs-messaging-create.sql&amp;package_key=acs-messaging">
+acs-messaging-create.sql</ulink></para></listitem>
+
+<listitem><para><ulink url="acs-messaging-and-bboard-dm.gif">Data-model diagram</ulink></para></listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2 id="design-intro">
+<title>Introduction</title>
+
+
+<para><computeroutput>bboard</computeroutput> is an ACS application package built to provide
+scalable discussion forums to a community of users. As in older versions,
+<computeroutput>bboard</computeroutput> provides:</para>
+
+<itemizedlist>
+<listitem><para>posting, browsing, and reading of messages in discussion forums</para></listitem>
+
+<listitem><para>tools for moderators to maintain editorial standards</para></listitem>
+
+<listitem><para>categorization and retrieval for knowledge management</para></listitem>
+</itemizedlist>
+
+<para>
+The initial 4.0 implementation adds the following new features: 
+</para>
+
+<itemizedlist>
+<listitem><para>fully templated presentation layer for easy customization</para></listitem>
+
+<listitem><para>improved access control on bboard operations to support a wide variety of
+publisher policies</para></listitem>
+
+<listitem><para>support for multiple distinct configurations of the bboard package (e.g.
+different forums and options at http://foo.com/bboard/ and
+http://foo.com/pittsburgh/bboard/)</para></listitem>
+</itemizedlist>
+
+
+
+ 
+
+<para>The ACS 4.0 version of <computeroutput>bboard</computeroutput> is a re-engineering of the data
+model and presentation layer without certain capabilities present in the ACS
+3.4 bboard. In future releases we intend to achieve the same level of
+maturity as the older <computeroutput>bboard</computeroutput> while building on the flexibility
+of the new design.</para>
+
+<para>
+In particular this implementation (9/2000) does not include the following
+features found in prior versions: 
+</para>
+
+<itemizedlist>
+<listitem><para>support for expiring messages</para></listitem>
+
+<listitem><para>facilities for spamming dynamic classes of bboard users</para></listitem>
+
+<listitem><para>bboard messages with rich media attachments</para></listitem>
+
+<listitem><para>email alert functionality</para></listitem>
+
+<listitem><para>full text messages searching</para></listitem>
+</itemizedlist>
+
+<para><computeroutput>bboard</computeroutput> is <emphasis>not</emphasis> intended to be the ultimate
+customizable web based discussion system. It is intended to be a practical
+and useful system that supports forums much like the photo.net Q&amp;A forum.
+Publishers with special needs are encouraged to implement their solution as a
+module, much like bboard, built atop the framework <computeroutput>acs-messaging</computeroutput>
+provides.</para>
+
+<para><computeroutput>acs-messaging</computeroutput> is a general purpose component that provides
+threaded messaging services to higher level applications such as
+<computeroutput>bboard</computeroutput>. The motivation is to provide a base level data model and
+reusable presentation code that enables the rapid customization of messaging
+applications. acs-messaging is intended to simplify modules like
+<computeroutput>general comments</computeroutput> and <computeroutput>webmail</computeroutput>, as well as
+specialized messaging applications such as <ulink url="http://www.scorecard.org/">scorecard</ulink>&#39;s geospatial bboard. Such
+a framework keeps custom organizational metadata, pageflow and navigation,
+and publishing and moderation policy separate from the basic tools needed for
+discussion.</para>
+
+</sect2>
+
+<sect2 id="design-history">
+<title>Historical Considerations</title>
+
+<para>
+Over the course of ACS development, <computeroutput>bboard</computeroutput> has grown to
+encompass a wide variety of functionality. Much of this functionality was
+developed first for <computeroutput>bboard</computeroutput> and only later adapted into more
+general mechanisms (e.g. alerts, security, group scoping, etc.,). However
+<computeroutput>bboard</computeroutput> wasn&#39;t refactored to take advantage of the more
+general facilities, and its complexity challenged those in need of custom
+features. Furthermore there was a lot of ad hoc mechanism in both the data
+model and page flow to support different presentation styles, navigation
+schemes, and access control models. Although this <computeroutput>bboard</computeroutput> proved
+to be useful, scalable, and reliable, the ability to maintain and extend this
+code suffered.
+</para>
+
+<para>
+The ACS 4.0 release of bboard mimics the basic functionality of older
+<computeroutput>bboard</computeroutput> versions but built atop new ACS 4.0 general mechanisms
+(objects, persmissions, templating, acs-messaging, etc.,). 
+</para>
+
+</sect2>
+
+<sect2 id="design-competitors">
+<title>Competitive Analysis</title>
+
+<para>
+An analysis of the bboard feature space should be added here. 
+</para>
+
+<itemizedlist>
+<listitem><para>USENET a la gnus</para></listitem>
+
+<listitem><para>slashdot</para></listitem>
+
+<listitem><para>Userland</para></listitem>
+
+<listitem><para>????</para></listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2 id="design-tradeoffs">
+<title>Design Tradeoffs</title>
+
+
+<para>How does one reconcile all the possible discussion forums mentioned above
+into a single module? One does not! <computeroutput>bboard</computeroutput> is precisely one way
+to implement a discussion forum and should not be all things. In time, there
+should be a toolkit of components (user interface, data model, and
+procedural) for developers to assemble their custom.</para>
+
+<para>Although many of the entities in the data model are implemented as
+subtyples of ACS object, we avoid using information from the ACS object table
+for anything but auditing purposes. For example, we could store a
+message&#39;s author in the ACS object creation_user field, however to keep
+query performance in line we rather use the author field in acs_messages.</para>
+
+</sect2>
+
+<sect2 id="design-api">
+<title>API</title>
+
+
+<para>As of the initial ACS 4.0 release, <computeroutput>acs-messaging</computeroutput> and
+<computeroutput>bboard</computeroutput> do not provide well defined programming interfaces.</para>
+
+<para>Although convenience functions will be provided for basic transactions on
+the <computeroutput>acs-messaging</computeroutput> and <computeroutput>bboard</computeroutput> entities, it remains
+to be seen what sort of abstraction layer is most appropriate.</para>
+
+</sect2>
+
+<sect2 id="design-data-model">
+<title>Data Model Discussion</title>
+
+
+<para><computeroutput>acs-messaging</computeroutput> defines the view <computeroutput>acs_messages_all</computeroutput>
+for the storage and access of threaded text messages and assorted information
+relevant to their display, access, and creation. Under the covers
+<computeroutput>acs-messaging</computeroutput> use the content repository for underlying
+storage.</para>
+
+<para><computeroutput>bboard</computeroutput> uses <computeroutput>acs-messaging</computeroutput> messages, and
+organizes them into forums and categories. For the purposed of the ACS
+permissions system, forums contain messages, and so any permissions on a
+forum will default to being inherited for individual messages.</para>
+
+<para>A forum may be designated as moderated, in which case explicit approvals
+or denials are stored in the <computeroutput>bboard_message_moderation</computeroutput>. Messages
+without entries in the moderation table are considered unseen, and will be
+displayed or hidden in moderated forums based on policy.</para>
+
+<para>Each forum may have some number of categories, tags denoting further
+specialization within a forum. Messages of a forum may be tagged as being in
+any of the categories pertaining to that forum.</para>
+
+<para><emphasis role="strong">Permissions</emphasis></para>
+
+<para>
+Permissions in ACS 4.0 involve 3 interrelated hierarchies: users &amp;
+groups, objects, and privileges. The user and group hiearchy is generally
+explained elsewhere. The short explanation:
+</para>
+
+<para>The long explanation: BBoard defines the following permissions:</para>
+
+<itemizedlist>
+<listitem><para>nested under the create permission:</para></listitem>
+
+<listitem><para>bboard_create_forum</para></listitem>
+
+<listitem><para>bboard_create_category</para></listitem>
+
+<listitem><para>bboard_create_message</para></listitem>
+
+<listitem><para>nested under the write permission:</para></listitem>
+
+<listitem><para>bboard_write_forum</para></listitem>
+
+<listitem><para>bboard_write_category</para></listitem>
+
+<listitem><para>bboard_write_message</para></listitem>
+
+<listitem><para>nested under the read permission:</para></listitem>
+
+<listitem><para>bboard_read_forum</para></listitem>
+
+<listitem><para>bboard_read_category</para></listitem>
+
+<listitem><para>bboard_read_message</para></listitem>
+
+<listitem><para>nested under the delete permission:</para></listitem>
+
+<listitem><para>bboard_delete_forum</para></listitem>
+
+<listitem><para>bboard_delete_category</para></listitem>
+
+<listitem><para>bboard_delete_message</para></listitem>
+
+<listitem><para>nested under the moderate permission:</para></listitem>
+
+<listitem><para>bboard_moderate_forum</para></listitem>
+</itemizedlist>
+
+</sect2>
+
+<sect2 id="design-ui">
+<title>User Interface</title>
+
+<para>...</para>
+
+</sect2>
+
+<sect2 id="design-config">
+<title>Configuration/Parameters</title>
+
+<para>...</para>
+
+</sect2>
+
+<sect2 id="design-accept-tests">
+<title>Acceptance Tests</title>
+
+<para>...</para>
+
+</sect2>
+
+<sect2 id="design-future">
+<title>Future Improvements/Areas of Likely Change</title>
+
+
+<para>Much of the functionality of the ACS content repository will eventually
+provide tangible benefits to <computeroutput>bboard</computeroutput> and any
+<computeroutput>acs-messaging</computeroutput> application. Foremost among these features will be
+full text searching and rich media attachments.</para>
+
+<para>When ACS provides a general mechanism for an installation to send and
+receive email, <computeroutput>bboard</computeroutput> can provide email alerts and email based
+reply and post.</para>
+
+</sect2>
+
+<sect2 id="design-authors">
+<title>Authors</title>
+
+<para>
+<ulink url="mailto:akk@arsdigita.com">Anukul Kapoor</ulink> 
+</para>
+
+</sect2>
+
+<sect2 id="design-rev-history">
+<title>Revision History</title>
+
+<informaltable>
+<tgroup cols="4">
+<thead>
+<row>
+<entry>Document Revision #</entry>
+<entry>Action Taken, Notes</entry>
+<entry>When?</entry>
+<entry>By Whom?</entry>
+</row>
+</thead>
+
+<tbody>
+
+<row>
+<entry>0.2</entry>
+<entry>Revision</entry>
+<entry>09/19/2000</entry>
+<entry>Anukul Kapoor</entry>
+</row>
+
+
+<row>
+<entry>0.1</entry>
+<entry>Creation</entry>
+<entry>09/01/2000</entry>
+<entry>Anukul Kapoor</entry>
+</row>
+
+
+</tbody></tgroup></informaltable>
+
+<!-- notes for writing
+
+different organizations of discussion messaging (general comments, webmail, different bboard implementations) -> acs messaging with bboard layer above
+
+inconsistent 'new' messages behavior -> read-thread-user-map
+
+inconsistent alert and email behavior -> centralized alerts and email processing
+
+fully templated for flexible presentation
+and simple interface for 
+
+acs-messaging aims to provide:
+ centralized storage, searching of message threads
+ generalized integration with email messaging
+-->
+
+
+
+
+</sect2>
+
+</sect1>
+

@@ -1,0 +1,21 @@
+<sect1 id="introduction" xreflabel="Bboard Introduction">
+<title>Bboard Introduction</title>
+
+<sect2 id="whatisbboard" xreflabel="What is Bboard?">
+<title>What is Bboard?</title>
+
+<para>
+BBoard is a web based discussion system for the ArsDigita Community
+System.  Once installed and mounted, bboard instances provide
+locations on the site that contain discussion forums
+(e.g. http://developer.arsdigita.com/bboard/).  Users can post and
+read messages within individual forums, which are generally geared
+towards specific topics or audiences.  This basic functionality is
+supplemented with a variety of additional features including image and
+file message attachments, email notification, categorization, and
+moderation facilities.
+</para>
+
+</sect2>
+
+</sect1>

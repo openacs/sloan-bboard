@@ -1,0 +1,42 @@
+<sect1 id="misc" xreflabel="Release Notes and Miscellaneous Stuff">
+<title>Release Notes and Miscellaneous Stuff</title>
+
+<sect2 id="release-notes">
+<title>Release Notes</title>
+
+<para>
+This is the final release of BBoard 4.0.2.  This release requires ACS
+Core 4.0.1, available from the <ulink
+url="http://www.arsdigita.com/acs-repository/">ACS Repository</ulink>.
+</para>
+
+<para>This version offers a working drop script, numerous bugfixes, and some
+notable improvements such as:</para>
+
+<itemizedlist>
+<listitem><para>support for binary attachments</para></listitem>
+
+<listitem><para>letting users email postings to others</para></listitem>
+
+<listitem><para>more informative displays</para></listitem>
+
+<listitem><para>performance improvements</para></listitem>
+<listitem><para></para></listitem>
+<listitem><para></para></listitem>
+<listitem><para></para></listitem>
+</itemizedlist>
+
+
+</sect2>
+
+<sect2 id="misc-notes">
+<title>Miscellaneous Notes</title>
+
+<para>
+Text searching requires the maintaince of the content repository
+<computeroutput>cr_rev_content_index</computeroutput> index; either by hand or by context.
+</para>
+
+</sect2>
+
+</sect1>

@@ -1,0 +1,185 @@
+<sect1 id="installation" xreflabel="Installation and Configuration of Bboard">
+<title>Installation and Configuration of Bboard</title>
+
+<sect2 id="installation-installation">
+<title>Installation</title>
+
+<para>
+Using bboard requires an operating ACS 4.0.1 installation. If you haven&#39;t
+upgraded, do so first.
+</para>
+
+<para>
+Installing and enabling the bboard package should be
+relatively painless, just: 
+</para>
+
+<orderedlist>
+<listitem><para>
+go to your server&#39;s 
+<ulink url="/acs-admin/apm/package-load">/acs-admin/apm/package-load</ulink>
+page, enter
+&quot;www.arsdigita.com/acs-repository/download/apm/bboard-4.0.2.apm&quot;
+in the first text box
+</para>
+</listitem>
+
+<listitem>
+<para>
+click the button and follow the instructions
+</para>
+</listitem>
+</orderedlist>
+
+<para>
+If you&#39;re reading this on your own server, you&#39;ve 
+probably already done this.
+</para>
+
+<para>
+Once the package is installed and enabled, a subsite administrator can
+<emphasis>mount</emphasis> instances on their subsite. If you&#39;re the 
+lone &amp;uuml;ber-admin
+of your site, you can just go to your site&#39;s 
+<ulink url="/admin/site-map/">/admin/site-map/</ulink> page and:
+</para>
+
+<orderedlist>
+
+<listitem><para>
+create a new subfolder under the &quot;/&quot; directory
+</para></listitem>
+
+<listitem><para>
+Pick a creative
+label for your subfolder like &quot;bboard&quot; or &quot;dgroup&quot;
+</para></listitem>
+
+<listitem><para>
+Select
+&quot;new application&quot; for that subfolder, and choose BBoard from the
+pulldown menu. 
+</para></listitem>
+</orderedlist>
+
+<para>
+It is probably best to label the application instance the same
+as your subfolder; do otherwise if it helps you keep your site straight.</para>
+
+<para>At this point you should have a BBoard instance mounted in the subfolder
+directory - for the rest of this document I assume that you've choosen &quot;/bboard&quot;. 
+</para>
+
+</sect2>
+
+<sect2 id="installation-config">
+<title>Initial Configuration</title>
+
+<para>
+Before you can start using the Bboard you have to create some forums:
+</para>
+
+<orderedlist>
+<listitem><para>
+log in as an administrator
+</para></listitem>
+
+<listitem><para>
+surf to <computeroutput>/bboard</computeroutput> and click &quot;Create a forum&quot;
+</para>
+</listitem>
+</orderedlist>
+
+<para>
+After you've created one or more forums you can specify the settings for your instance
+of Bboard from the <ulink url="/admin/site-map/">Site Map</ulink> 
+(click <computeroutput>set parameters</computeroutput>). 
+</para>
+
+<para>
+Most of the setting you see require a &quot;t&quot; (for true) or &quot;f&quot; (for false).
+The rest should be self-explanatory.
+</para>
+
+<variablelist>
+<varlistentry>
+<term><emphasis role="strong"><computeroutput>ThreadingEnabledP</computeroutput></emphasis>
+
+</term>
+ 
+<listitem><para>This enables or disables threading indentation on a single thread basis.
+&quot;t&quot; enables threading and &quot;f&quot; (the default) turns it
+off.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><emphasis role="strong"><computeroutput>MailFriendEnabledP</computeroutput></emphasis>
+
+</term>
+ 
+<listitem><para>This enables the option for users to mail copies of a bboard posting to a
+friend (or themselves). Since this functionality can be abused, consider
+disabling the functionality.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><emphasis role="strong"><computeroutput>UserPostsEditableP</computeroutput></emphasis>
+
+</term>
+ 
+<listitem><para>This grants users privileges to edit their own message. Note: toggling
+this parameter will not change the ability of user to edit existing messages.
+This parameter only effects whether users are granted rights to edit at the
+message&#39;s posting time. This must be enabled for attachments to
+work.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><emphasis role="strong"><computeroutput>UserPostsDeletableP</computeroutput></emphasis>
+
+</term>
+ 
+<listitem><para>This grants users privileges to delete their own
+message. Note: This parameter only effects whether users are granted
+rights to edit their message&#39;s with the
+<computeroutput>UserPostsEditableP<computeroutput>.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><emphasis role="strong"><computeroutput>AttachmentsEnabledP</computeroutput></emphasis>
+
+</term>
+ 
+<listitem><para>This lets users who have edit capability on a message upload file or
+image attachments.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<emphasis role="strong"><computeroutput>MaxAttachmentSize</computeroutput></emphasis>
+</term>
+ 
+<listitem><para>This specifies the maximum size in bytes to accept for binary
+attachments. The default is 1 megabyte.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+<emphasis role="strong"><computeroutput>DisplayLastNDays</computeroutput></emphasis>
+</term>
+ 
+<listitem><para>This parameter controls how many days worth of recent messages are
+displayed on the forum overview page by default. 0 specifies that all
+messages should be displayed.</para></listitem>
+</varlistentry>
+</variablelist>
+
+<para>
+If you want to learn how to set more advanced parameters of your Bboard instance,
+read <xref linkend="configuration"/>.
+</para>
+
+</sect2>
+
+</sect1>
+

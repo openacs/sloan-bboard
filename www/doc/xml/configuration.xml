@@ -1,0 +1,116 @@
+<sect1 id="configuration" xreflabel="Advanced Configuration">
+<title>Advanced Configuration</title>
+
+<para>
+The ACS 4.0 permissions system is about hierarchies and in particular
+hiearchical containment. There are three important hiearchies: 
+</para>
+
+<orderedlist>
+<listitem><para>
+the user hierarchy (users, groups, and parties)
+</para></listitem>
+
+<listitem><para>
+the object hierarchy (objects nested in the contexts of others)
+</para></listitem>
+
+<listitem><para>
+the privilege hiearchy (privileges can entail other entails). 
+</para></listitem>
+</orderedlist>
+
+<para>
+This complexity of mechanism is designed to allow for
+simplicity of use for programmers and administrators. Unfortunately,
+interfaces to facilitate this simplicity of use are not here yet. Until then,
+sophisticated control and configuration of BBoard necessitates an
+understanding of these details.
+</para>
+
+<para>The first hierarchy is straightforward. There are users and groups (or
+together parties). Privileges granted to groups inherit to their members.</para>
+
+<para>Unless explicitly disabled (see below), privileges granted to parties are
+inherited down an object hierarchy. The nature of the BBoard hierarchy is as
+follows: subsites contain bboard package instances; bboard package instances
+contain forums; forums contain both categories and messages. Privileges
+granted to parties on the package instance are inherited to all the forums
+nested within and so on.</para>
+
+<para>The third hiearchy is the least clear. Privileges can be nested into other
+privileges. This lets us group related privileges like those for reading a
+message and reading a forum together to allow us to easily grant &quot;read
+access&quot; on a hiearchy of objects to a party even though there are
+separate notions of &quot;read a message&quot; and &quot;read a forum&quot;.
+All the bboard privileges are nested in one of the following system level
+&quot;super&quot;-privileges: &quot;read&quot;, &quot;write&quot;,
+&quot;create&quot;, &quot;delete&quot;, and &quot;admin&quot;.</para>
+
+<para>The full set of self explanatory bboard privileges is listed here:</para>
+
+<itemizedlist>
+<listitem><para>bboard_create_forum</para></listitem>
+<listitem><para>bboard_create_category</para></listitem>
+<listitem><para>bboard_create_message</para></listitem>
+<listitem><para>bboard_write_forum</para></listitem>
+<listitem><para>bboard_write_category</para></listitem>
+<listitem><para>bboard_write_message</para></listitem>
+<listitem><para>bboard_read_forum</para></listitem>
+<listitem><para>bboard_read_category</para></listitem>
+<listitem><para>bboard_read_message</para></listitem>
+<listitem><para>bboard_delete_forum</para></listitem>
+<listitem><para>bboard_delete_category</para></listitem>
+<listitem><para>bboard_delete_message</para></listitem>
+<listitem><para>bboard_moderate_forum</para></listitem>
+</itemizedlist>
+
+
+<para>
+Permissions on package instances are controlled through the &quot;set
+permissions&quot; options on the appropriate folder in the admin site map
+(/admin/site-map/). While in principal, the system should allow you to grant
+permissions on lower level objects like forums or even individual messages
+and categories, right now the UI is limited to granting permissions on the
+application instance. SQL*Plus users or even URL hackers can probably figure
+out how to do this if they&#39;re so inclined. 
+</para>
+
+<para>The default set of permissions granted in a bboard system are those
+inherited from the main site:</para>
+
+<itemizedlist>
+<listitem><para>Registered Users have bboard_create_message</para></listitem>
+
+<listitem><para>The Public has bboard_read_category</para></listitem>
+
+<listitem><para>The Public has bboard_read_forum</para></listitem>
+
+<listitem><para>The Public has bboard_read_message</para></listitem>
+
+<listitem><para>The Public has read</para></listitem>
+
+<listitem><para>[Admin user] admin</para></listitem>
+</itemizedlist>
+
+<para>
+Granting additional privileges to parties is fairly straightforward. For
+moderated forums, creating a moderators group and granting them
+&quot;bboard_moderate_forum&quot; (or &quot;admin&quot; if you&#39;re feeling
+lucky) will let you delegate more of the discussion culling.
+</para>
+
+<para>For significantly different configurations you might need to revoke
+privileges already granted by the defaults. In this case you must configure
+the package instance not to inherit permissions from the main site and then
+add back any permissions needed. Granting &quot;read&quot; to registered
+users and bboard_create_message to &quot;Elite d00ds&quot; will give you a
+pseudo-private forum.</para>
+
+<para>Note: To facilitate usability in the common case, BBoard pages present the
+option to post or reply even if the user doesn&#39;t have the
+bboard_create_message privilege. If you remove posting ability from
+registered users, you may wish to alter the templates to appropriately
+display options.</para>
+
+</sect1>

@@ -1,0 +1,116 @@
+2001-01-03  Anukul Kapoor  <akk@squishy>
+
+	* www/message.tcl, www/message-threaded.tcl: fixed problem where
+	"deleted" messages are displayed
+
+	* www/doc/index.html, www/doc/requirements.html: slight
+	documentation improvements
+
+	* bboard.info: changed version to 4.0.2rc
+
+	* sql/bboard-drop.sql: added support for dropping attachments and
+	email a friend droppings
+
+	* www/forum-view.adp: fixed a buggy link to "All messages"
+
+	* www/message-threaded.adp: added anchor support
+
+	* www/message-list.adp: support for showing the date in search
+	results
+
+	* www/search.adp, www/search.tcl: we know show the date on search
+	results
+
+	* www/message-new-3.tcl: add support for user editable permissions
+
+	* www/message-entry.adp: don't show attachments when replying
+
+	* www/message.adp, www/message.tcl, www/messages-by-user.tcl,
+	www/search.tcl: support for anchored reference to replies
+
+	* www/message-mail-2.tcl: fixed email a friend artifact messages
+	not to point with reply_to at parent message.  also updated to use
+	new return redirect target
+
+	* www/message-list.adp: support for last updated column
+
+	* www/master.adp: context_bar is no longer required
+
+	* www/forum-view.adp, www/forum.tcl: support for "last updated"
+	column on forum overview page as well as last_n_days of messages
+	being shown
+
+	* www/attachment-delete.tcl, www/attachment.tcl,
+	www/message-attach.tcl, www/simple-message.adp,
+	www/simple-message.tcl, www/message-attach-2.tcl,
+	www/message-attach.adp: added attachment support
+
+	* www/forum-by-category.tcl: formatting change
+
+	* tcl/bboard-procs.tcl: added attachment support and a work around
+	for an acs-messaging bug
+
+	* bboard.info: added parameters for: mailing a friend user posts
+	editable attachments enabled max attachment size display last N
+	days
+
+2000-12-04  Anukul Kapoor  <akk@arsdigita.com>
+
+	* bboard.info: updated file and version info
+
+	* sql/upgrade-4.0.1-4.0.2.sql: removed a redundant index creation
+
+2000-12-01  Anukul Kapoor  <akk@arsdigita.com>
+
+	* bboard.info: updated file and version info
+
+	* tcl/bboard-procs.tcl: Added bboard_n_spaces proc
+
+	* www/forum-delete.tcl:
+	* www/forum-delete.adp:
+	* www/forum-delete-2.tcl: Added UI for deleting a forum.
+
+	* www/index.tcl: Added querying for bboard_forum_delete permissions
+	* www/index.adp: Added links to deleting a forum
+
+2000-12-01  John Prevost  <jmp@arsdigita.com>
+
+	* www/message-delete-2.tcl: Fixed typo in contract
+
+        * sql/upgrade-4.0.1-4.0.2.sql:
+        * sql/bboard-create.sql: Added appropriate on delete cascade
+          clauses.
+
+        * www/category-delete.tcl:
+        * www/category-delete.adp:
+        * www/category-delete-2.tcl: Added UI for deleting a category.
+        
+        * www/forum-view.adp: Now expects categories rows to have a
+          delete_p column.  Provides a link to delete the category if it's
+          "t".
+        
+        * www/master.adp: Master template for bboard now calls out to the
+          default master (picking up appropriate colors and style from the
+          core-ui.)
+
+2000-11-30  John Prevost  <jmp@arsdigita.com>
+
+        * www/message-mail.tcl:
+        * www/message-mail.adp:
+        * www/message-mail-2.tcl: Preliminary UI for mailing a friend.
+        
+        * www/simple-message.tcl:
+        * www/simple-message.adp: Added "send to a friend" link.
+
+2000-11-27  Anukul Kapoor  <akk@arsdigita.com>
+
+        * Released 4.0.1
+
+        * sql/upgrade-4.0b-4.0.sql:
+        * sql/upgrade-4.0-4.0.1.sql: Added bboard_im_convert to the
+          upgrade script.  Incremented version number to be sure it gets
+          run.
+
+2000-11-27  Anukul Kapoor  <akk@arsdigita.com>
+
+        * Released 4.0 (initial production release)

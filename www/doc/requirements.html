@@ -1,0 +1,359 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Bulletin Board Requirements</title>
+  </head>
+
+  <body bgcolor="#ffffff">
+    <h1>Bulletin Board Requirements</h1>
+    by <a href="mailto:akk@arsdigita.com">Anukul Kapoor</a>, <a href="mailto:psu@arsdigita.com">Pete Su</a>, and <a href="mailto:mthomas@arsdigita.com">Mark Thomas</a>
+    <hr>
+
+    <h3>I. Introduction</h3>
+
+    <p>This document outlines necessary functionality and behavior of
+      the new ACS 4.0 Bulletin Board system (herein referred to as bboard).
+
+    <p>Our intent (as of 8/2000) is to start with a simple
+      implementation that can accomodate future advanced functionality.
+      As a result, these requirements may not prescribe functionality
+      present in the ACS 3.4 bboard system.  We are using the
+      uslaw-bboard module as inspiration for a lightweight
+      implementation.
+
+    <p>Futhermore, this document is conservative in attempting to
+      describe the ultimate framework for modular web based messaging.
+      We hope such an architecture may well be born out of iterative
+      process when designing this system.  However, the scope is being
+      primarily limited to functional requirements.
+
+    <p>The future requirements (section VII) should inform the design
+      process if not initially implemented.
+      
+    <h3>II. Vision Statement</h3>
+
+    <p>An electronic bulletin board system is one of the simplest and
+      most effective forms of collaboration between people separated in
+      space and time.  Bboards provide a centralized and shared venue
+      for discussion that save communication costs over ad-hoc
+      mechanisms (like arbitrary email lists).  Since messages are
+      organized by topic as well as temporally, bboard can provide
+      lightweight interfaces for rapidly navigating to interesting
+      messages.  This low barrier to participation encourages
+      spontaneous collaboration between disperse parties in the
+      community.
+      
+    <p>The bboard system also serves as a useful archive and ad-hoc
+      knowledge management tool by virtue of its persistence, light
+      weight organizational structure, and flexible browse and search
+      facilities.  This sort of knowledge base can be easily leveraged
+      to provide long term pedagogical value as well as aid in future
+      problem solving.
+      
+    <p>When integrated with an email system, bboards radically improve
+      email based collaboration.  Email notifications can encourage
+      continuous awareness of community issues.  Email based reply
+      functionality further lowers the barrier to participation,
+      encouraging more Interaction around the Transaction<sup>TM</sup>.
+      
+    <h3>III. System/Application Overview</h3>
+
+    <p>The bboard system allows users to browse, read, and
+      post messages organized into forums.  Messages consist of short
+      text messages with optional attachments such as image files or
+      html documents.  Messages are organized into threads when users
+      reply to each other, maintaining the temporal flow of a particular
+      discussion.
+      
+    <p>Forums are contexts for discussion relating to a particular
+      domain of interest.  Examples include the photo.net Q&A forum, the
+      ArsDigita Web/DB forum, and the away.com discussion forum.
+      Messages within a particular forum can optionally be tagged as
+      being in certain categories to assist searching and navigation.
+      Forums are always created in the context of a subsite.
+
+    <h3>IV. Use-cases and User Scenarios</h3>
+    
+    <p><b>Administrator</b>: Phillis Goodsport is a world famous
+      lithographer who wants to share her knowledge about lithography
+      and encourage interaction between a community of lithographers on
+      her new site litho.net.  Although she likes the idea of a broad
+      forum for general lithography discussion, she wants browsing to be
+      tractable when traffic increases.  If quality goes down, she'd
+      like to dedicate one of her minions to moderating traffic to
+      maintain her high standards.
+      
+    <p><b>Casual browser and poster</b>: Joe Schmoe goes to photo.net
+      for the first time and wants to ask what zoom lens to buy.  He
+      needs to find the appropriate category/topic to post his message.
+      
+    <p><b>Compulsive reader and expert poster</b>: Jane Developer is a
+      web development guru and wants to keep up with as much of the
+      traffic on the web/db forum as possible.  She wants to become
+      aware of posts that might become relevant to her in the future
+      as well as help out folks who have problems she knows how to
+      solve.  Since Jane is on lots of developer mailing lists, her
+      preferred form of interaction is via email.
+
+    <p><b>Moderator</b>: Dave Balderdash is a chatter.net moderator and
+      wants to delete redundant or useless posts.  He's short
+      on time, so he wants a quick interface for rejecting and approving
+      posts.
+      
+   <p><b>Targeted researcher</b>: Ted Stetson is an ACS developer who
+      remembers someone mentioning something about his Oracle problem on
+      a bboard.  He wants to find records of similar problems and any
+      related solutions.
+
+    <h3>V. Related Links</h3>
+
+    <ul>
+      <li>Design Document (not available)
+      <li>Test Plan (not available)
+      <li><a href="http://www.arsdigita.com/general-comments/view-one?comment_id=28646&item=BBoard%20module">notes on USLaw-BBoard implementation</a>
+      <li><a href="/doc/acs-kernel/subsites/requirements">Subcommunities</a>
+      <li><a href="http://www.arsdigita.com/bboard/q-and-a-fetch-msg?msg_id=0003ye">Karl's thoughts on bboard redesign</a>
+      <li><a href="http://www.arsdigita.com/bboard/q-and-a-fetch-msg?msg_id=0007ew">Adam Farkas's web/db thread on bboard improvements</a>
+    </ul>
+
+
+    <h3>VI.A Requirements: User Interface</h3>
+    <h4>End User Basics</h4>
+
+    <p><strong>10.10.10</strong> The bboard system must provide
+      mechanism for users to effectively choose which messages to read
+      within a forum.  Bboard must provide an overview interface to
+      enable users to find messages of interest or relevant to them.
+      This overview should provide the user with cursory information to
+      facilitate quick scanning and meaningful evaluation of message
+      contents.
+      
+      <p><strong>10.10.15</strong> The full text of bboard messages
+            should be searchable by user queries.
+
+    <p><strong>10.10.20</strong> <font color="red"> [unimplemented] </font>Bboard should consistently provide
+      a mechanism to limit or sort displayed posts by categories, posters,
+      and date range as well as to perform a text search.
+      
+    <p><strong>10.10.30</strong> <font color="red"> [unimplemented] </font>Most users primarily want
+      to browse and read new posts or replies since their last visit.
+      The bboard interface must allow users to ignore messages they've
+      already read.
+
+    <p><strong>10.10.40</strong> <font color="red"> [unimplemented] </font>Users should be able to search within
+      and limit scope to messages they have already read as well as
+      messages they have not read at all.
+
+    <p><strong>10.10.50</strong> Users must be able to easily post new
+      messages to a bboard, or reply to existing messages they have come
+      across.  When replying, users must be presenting with enough
+      context to assist their composition.
+
+    <h4>Email Integration</h4>
+
+    <p><strong>10.20.10</strong> Users can register for email
+      notification of new messages in a particular forums.
+
+    <p><strong>10.20.13</strong> Users can register for email
+      notifications on a particular thread.
+
+    <p><strong>10.20.16</strong> Users can register for email
+      notifications on a particular category.
+
+    <p><strong>10.20.20</strong> <font color="red"> [unimplemented] </font>Notifications can be sent as each
+      message arrives or in an organized digest form over a configurable
+      time period.
+
+    <p><strong>10.20.30</strong> Individual messages will have appropriate RFC 822
+      headers to enable threading in the mail client.
+
+    <p><strong>10.20.40</strong> <font color="red"> [unimplemented]
+      </font>Email from the alert system should be tagged in the
+      header with the site and forum name to enable easy filtering in
+      mail clients.  Well, as easy as the mail clients make it anyway.
+
+    <p><strong>10.20.50</strong> <font color="red"> [unimplemented]
+      </font>If the user requests it, email generated should use MIME
+      encoding to deliver attachements and appropriately encode HTML.
+      Otherwise plain text emails should be augmented with URLs and
+      styling cues in place of rich content.
+
+    <h4>Administrative Requirements</h4>
+
+    <p><strong>10.30.10</strong> The bboard system must support a
+      flexible presentation layer that allows custom layout of bboard
+      content.
+
+    <p><strong>10.30.15</strong> Publishers should have the option of
+        displaying discussions in a flat linear fashion or in an indented
+	threaded view.
+
+    <p><strong>10.30.20</strong> Parties with administrative
+      privileges on a particular subsite can create, delete, and edit
+      forums scoped to that subsite.
+
+    <p><strong>10.30.30</strong> Forums can be designated moderated in
+      which case parties with sufficient privileges must approve
+      messages before they are displayed generally.
+
+    <h4>Access Control Requirements</h4>
+
+    Objects must be structured to allow the flexible configuration and
+    assignment of the following privileges:
+      
+    <p><strong>10.40.10</strong> Reading forums
+
+    <p><strong>10.40.20</strong> Reading messages
+
+    <p><strong>10.40.30</strong> Posting new messages
+
+    <p><strong>10.40.50</strong> Approving and rejecting posted messages
+      (for moderated groups)
+
+    <p><strong>10.40.60</strong> Managing the forum (editing title and
+      description, determining moderation and restriction policies,
+      granting approval privileges to others, banning users)
+
+    <p><strong>10.40.70</strong> Managing categories (editing, deleting,
+      combining categories)
+
+    <h3>VI.B Requirements: Datamodel</h3>
+    
+    <h4>Messages</h4> 
+
+    <p><strong>10.80.10</strong> Messages are the basic units of the
+      bboard module.  The bboard system will provide a repository to
+      store text messages.
+
+    <p><strong>10.80.20</strong> Messages will be tagged as having
+      HTML, plain text, or preformatted text in their body.
+
+    <p><strong>10.80.30</strong> Messages will have a brief plain text
+      subject line.
+      
+    <p><strong>10.80.40</strong> Messages will be related to their
+      creating user.
+
+    <p><strong>10.80.50</strong> Messages may optionally have 
+      binary attachments.
+
+    <p><strong>10.80.60</strong> The bboard system must store relations
+      between messages and their replies to enable threaded views.
+
+    <h4>Forums</h4> 
+
+    <p><strong>10.90.10</strong> Forums are the main administrative
+      units of the bboard system.  Forums are containers to which
+      messages uniquely belong.
+
+    <p><strong>10.90.20</strong> Forums must have a brief text
+      descriptions and optionally a longer description called a charter.
+
+    <h4>Categories</h4>
+
+    <p><strong>10.100.10</strong> There must be a mechanism for
+      intra-forum categorization to facilitate filter, searching, and
+      tractability.
+
+    <h3>VI.C Requirements: API</h3>
+
+    <font color="red">No requirements in this section are met by the
+      current implementation.</font>
+
+    <p>Since bboard is primarily an end user application any exposed
+      APIs will come out of the design rather than nailed down
+      requirements from the start.  Stay tuned.
+
+    <h3>VI.D Possible Future Requirements</h3>
+
+    <p><strong>10.255.10</strong> bboard should provide a framework
+      for extending the generic messaging repository with meta-data
+      and in tandem extending the user interface to take advantage of
+      this meta-data.  This would let developers properly layer
+      functionality such as geo-spatial messaging and slashdot style
+      scoring. This is actually provided via ACS messaging and the ACS
+      Object system.
+      
+    <p><strong>10.255.20</strong> bboard should support replying to
+      and initiating threads from email.  Administrative email list
+      functionality should be developed or integrated.
+
+    <p><strong>10.255.30</strong> Bboard should let users register
+      interests (categories, certain users, keywords) for the purpose of
+      filtering and sorting message displays.
+
+    <p><strong>10.255.40</strong> Users should have the option of
+      enabling spell checking on their posts. A framework for filtering
+      (removing bad words, promoting text URLs to html links, auto
+      detecting HTML vs. plain text, etc.,) should exist.
+
+    <p><strong>10.255.50</strong> Allow users to configure how big the
+      textareas editing widgets they get are.
+
+    <p><strong>10.255.60</strong> Moderators should be given the
+      <em>option</em> of making notes on a given discussion that appear
+      prominently in the discussion display.
+
+    <p><strong>10.255.70</strong> Moderators should be able to set
+      posts to expire at a configurable time in the future.
+
+    <p><strong>10.255.80</strong> Mega bonus points: an nntp gateway to
+      bboards for access from standard news clients.
+
+    <p><strong>10.255.90</strong> The bboard system should be able to
+      take advantage of a caching system that stores the results of
+      database queries for optimal scalability.
+
+    <p><strong>10.255.100</strong> Publishers should have the option
+      of allowing users to edit various parts of messages after they are
+      posted (e.g. the text body, the subject, the text presentaiton
+      style etc.,)
+
+    <p><strong>10.255.110</strong> A user interface should allow
+    administrators to easily categorize or recategorize existing
+    messages.
+
+    <p><strong>10.255.120</strong> Publishers should be able to
+    classify users based on their forum contributions and
+    appropriately target them for email, promotions, etc.,
+      
+    <p><strong>10.255.130</strong> Explicit permissions for posting
+    new messages vs. posting replies.
+
+    <p><strong>10.255.140</strong> Explicit permissions for posting
+    attachments.
+
+    <h4>Performance requirements</h4>
+
+    <h3>VII. Revision History</h3>
+    
+<table cellpadding=2 cellspacing=2 width=90% bgcolor=#efefef>
+<tr bgcolor=#e0e0e0>
+    <th width=10%>Document Revision #</th>
+    <th width=50%>Action Taken, Notes</th>
+    <th>When?</th>
+    <th>By Whom?</th>
+</tr>
+
+<tr>
+   <td>0.1</td>
+   <td>Creation</td>
+   <td>08/23/2000</td>
+   <td>Anukul Kapoor</td>
+</tr>
+
+<tr>
+   <td>0.2</td>
+   <td>Revision: More standard style, more detailed requirements.</td>
+   <td>08/24/2000</td>
+   <td>Anukul Kapoor</td>
+</tr>
+
+
+</table>
+
+    <hr>
+    <address><a href="mailto:kapoor@maya.com"></a></address>
+Last modified: $Id$
+  </body>
+</html>
