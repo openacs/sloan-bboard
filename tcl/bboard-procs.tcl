@@ -957,7 +957,7 @@ ad_proc -public bboard_alert_message {
     } elseif {[string equal $mime_type "text/plain; format=flowed"]} {
 	set result [wrap_string $content]
     } elseif {[string equal $mime_type "text/html"]} {
-	set result [ad_html_to_text $content]
+	set result [ad_html_to_text -- $content]
     } else {
 	set result "Error display bboard posting as email!
 Our bboard system has received a post we don't know how to 
