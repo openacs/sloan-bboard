@@ -21,7 +21,7 @@
     <th align="right"><br>Charter (optional):</td>
     <td><textarea name="charter" rows="20" cols="50"><%= [ns_quotehtml $charter] %></textarea></td>
    </tr>-->
-   <tr>
+   <!--<tr>
     <th align="right">Moderated:</td>
     <if @moderated_p@ eq "t">
      <td><input type="checkbox" name="moderated_p" checked></td>
@@ -29,7 +29,7 @@
     <else>
      <td><input type="checkbox" name="moderated_p"></td>
     </else>
-   </tr>
+   </tr>-->
    <tr>
     <th></th>
     <td><input type="submit" value="@submit_label@"></td>

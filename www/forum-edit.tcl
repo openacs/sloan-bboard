@@ -26,8 +26,10 @@ db_1row forum_info {
       where forum_id = :forum_id
 }
 
-set context_bar {"Edit a Forum"}
-set title "Edit a Forum"
+set bboard_forum_name [bboard_forum_name]
+
+set context_bar [list "Edit a $bboard_forum_name"]
+set title "Edit a $bboard_forum_name"
 set action "forum-edit-2"
 set submit_label "Save Changes"
 
