@@ -2,10 +2,10 @@
 <property name="context_bar">@context_bar@</property>
 <property name="title">@bboard_forum_name_plural@</property>
 
-[<a href="subscriptions">Manage Email Alerts</a>]
+[<a href="subscriptions">Manage My Email Alerts</a>]
 
 <if @forums:rowcount@ eq 0>
- <i>There are no @bboard_forum_name_plural@ available.</i><p>
+ <p><i>There are no @bboard_forum_name_plural@ available.</i><p>
 </if>
 
 <else>
@@ -33,7 +33,6 @@
 
 <if @admin_p@ ne 0>
  [<a href="forum-new">Create a @bboard_forum_name@</a>]
- [<a href="/admin/site-map/parameter-set?package_id=@package_id@">Set Parameters</a>] 
  [<a href="/permissions/one?object_id=@package_id@">Admin Permissions</a>]
 </if>
 <p>

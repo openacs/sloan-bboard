@@ -15,7 +15,7 @@ ad_page_contract {
 
 set package_id [ad_conn package_id]
 
-set context_bar {}
+set context_bar [list Bboards]
 
 set user_id [ad_verify_and_get_user_id]
 
