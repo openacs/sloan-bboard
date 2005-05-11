@@ -38,7 +38,8 @@
 
 <table width="100%">
  <multiple name=messages>
-  <tr><td><img src="spacer.gif" width="<%= [expr 25*@messages.thread_depth@]%>" 
+  <tr><td><img src="spacer.gif" alt=""  width="<%= [expr 25*@messages.thread_depth@]%>" 
+
                align="left">
   <a name="@messages.message_id@">
   <include src="simple-message" title="@messages.title@" author="@messages.full_name@"
