@@ -6,7 +6,6 @@
     <pretty-plural>Sloan Bboard Forums</pretty-plural>
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
-    <maturity>4</maturity>
 
     <version name="4.0.3" url="http://openacs.org/repository/download/apm/bboard-4.0.3.apm">
     <database-support>
@@ -16,6 +15,7 @@
         <owner>Anukul Kapoor</owner>
         <owner>John Prevost</owner>
         <summary>ACS 4 bboard package.</summary>
+        <maturity>4</maturity>
         <release-date>2004-03-10</release-date>
         <vendor url="http://openacs.org">OpenACS</vendor>
         <description format="text/plain">This is the release candidate for bboard version 4.0.2.  This package provides customizable discussion forums for a community of users.</description>
