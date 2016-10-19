@@ -6,6 +6,7 @@
     <pretty-plural>Sloan Bboard Forums</pretty-plural>
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
+    <maturity>4</maturity>
 
     <version name="4.0.3" url="http://openacs.org/repository/download/apm/bboard-4.0.3.apm">
     <database-support>
