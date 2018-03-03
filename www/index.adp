@@ -32,7 +32,7 @@
  <ul>
   <multiple name=forums>
    <li><a href="forum?forum_id=@forums.forum_id@">@forums.short_name@</a>
-    <if @forums.moderated_p@ eq "t">
+    <if @forums.moderated_p;literal@ true>
      (moderated)
     </if>
     <if @admin_p@ ne "0">

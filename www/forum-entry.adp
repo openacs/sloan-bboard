@@ -43,7 +43,7 @@
    </tr>-->
    <!--<tr>
     <th align="right">Moderated:</td>
-    <if @moderated_p@ eq "t">
+    <if @moderated_p;literal@ true>
      <td><input type="checkbox" name="moderated_p" checked></td>
     </if>
     <else>

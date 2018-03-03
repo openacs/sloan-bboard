@@ -952,11 +952,11 @@ ad_proc -public bboard_alert_message {
 	    where forum_id = :forum_id
     }
 
-    if {[string equal $mime_type "text/plain"]} {
+    if {$mime_type eq "text/plain"} {
 	set result $content
-    } elseif {[string equal $mime_type "text/plain; format=flowed"]} {
-	set result [wrap_string $content]
-    } elseif {[string equal $mime_type "text/html"]} {
+    } elseif {$mime_type eq "text/plain; format=flowed"} {
+	set result [ns_reflow_text -- $content]
+    } elseif {$mime_type eq "text/html"} {
 	set result [ad_html_to_text -- $content]
     } else {
 	set result "Error display bboard posting as email!

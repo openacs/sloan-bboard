@@ -34,7 +34,7 @@
 </td>
 
 <td align="right">
- <if @subscribed_p@ eq 0>
+ <if @subscribed_p;literal@ false>
   <if @category_id@ not nil>
    [<a href="category-subscribe?category_id=@category_id@">Add Alert for this Category</a>]
   </if>
@@ -100,7 +100,7 @@
   <multiple name=categories>
    <li><a href="forum-by-category?forum_id=@forum_id@&category_id=@categories.category_id@">@categories.short_name@</a>
     (@categories.message_count@)
-    <if @admin_p@ eq "t">
+    <if @admin_p;literal@ true>
      [<a href="category-edit?category_id=@categories.category_id@">edit</a>]
      [<a href="category-delete?category_id=@categories.category_id@">delete</a>]
     </if>
@@ -123,7 +123,7 @@
 
 <p>
 
-<if @admin_p@ eq "t">
+<if @admin_p;literal@ true>
  <h3>Admin</h3>
  [<a href="forum-move?forum_id=@forum_id@">Move messages to other <%= [bboard_forum_name] %></a>]
 <!-- [<a href="/permissions/one?object_id=@forum_id@">Set Permissions</a>] -->

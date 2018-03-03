@@ -28,7 +28,7 @@
 </if></td>
 
 <td align="right"> 
-<if @subscribed_p@ eq 0>
+<if @subscribed_p;literal@ false>
   [<a href="message-subscribe?forum_id=@forum_id@&message_id=@message_id@">Subscribe to replies</a>]
  </if>
  <else>
