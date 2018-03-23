@@ -13,7 +13,7 @@ By <ulink url="mailto:akk@arsdigita.com">Anukul Kapoor</ulink>, <ulink url="mail
 4.0 Bulletin Board system (herein referred to as bboard).</para>
 
 <para>Our intent (as of 8/2000) is to start with a simple implementation that
-can accomodate future advanced functionality. As a result, these requirements
+can accommodate future advanced functionality. As a result, these requirements
 may not prescribe functionality present in the ACS 3.4 bboard system. We are
 using the uslaw-bboard module as inspiration for a lightweight
 implementation.</para>
