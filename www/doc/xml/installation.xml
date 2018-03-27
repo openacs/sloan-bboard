@@ -67,7 +67,7 @@ It is probably best to label the application instance the same
 as your subfolder; do otherwise if it helps you keep your site straight.</para>
 
 <para>At this point you should have a BBoard instance mounted in the subfolder
-directory - for the rest of this document I assume that you've choosen &quot;/bboard&quot;. 
+directory - for the rest of this document I assume that you've chosen &quot;/bboard&quot;.
 </para>
 
 </sect2>
