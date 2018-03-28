@@ -703,7 +703,7 @@ ad_proc -public bboard_subscriptions_url {} {
 ad_proc -public bboard_n_spaces {
     {n}
 } {
-    Returns a string containg n HTML spaces i.e &amp;nbsp;
+    Returns a string containing n HTML spaces i.e &amp;nbsp;
 } {
     set spaces ""
     for {set i 0} {$i < $n} {incr i} {
