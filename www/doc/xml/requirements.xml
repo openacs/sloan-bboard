@@ -18,7 +18,7 @@ may not prescribe functionality present in the ACS 3.4 bboard system. We are
 using the uslaw-bboard module as inspiration for a lightweight
 implementation.</para>
 
-<para>Futhermore, this document is conservative in attempting to describe the
+<para>Furthermore, this document is conservative in attempting to describe the
 ultimate framework for modular web based messaging. We hope such an
 architecture may well be born out of iterative process when designing this
 system. However, the scope is being primarily limited to functional
