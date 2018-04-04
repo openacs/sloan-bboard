@@ -195,7 +195,7 @@ clients make it anyway.</para>
 
 <para><emphasis role="strong">10.20.50</emphasis> <emphasis role="strong">[unimplemented]</emphasis> If the
 user requests it, email generated should use MIME encoding to deliver
-attachements and appropriately encode HTML. Otherwise plain text emails
+attachments and appropriately encode HTML. Otherwise plain text emails
 should be augmented with URLs and styling cues in place of rich content.</para>
 </blockquote>
 </listitem>
