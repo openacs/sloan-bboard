@@ -38,11 +38,11 @@ set user_id [ad_conn user_id]
 
 if [string eq $replies ""] {
     bboard_message_set_status -message_id $message_id -forum_id $forum_id \
-	    -status ""
+        -status ""
 } else {
     db_dml bboard_delete_threads {
-	delete from bboard_forum_message_map bfm
-	    where message_id in (select message_id
+        delete from bboard_forum_message_map bfm
+        where message_id in (select message_id
                                      from acs_messages m
                                      connect by prior message_id = reply_to
                                      start with message_id = :message_id)
@@ -55,3 +55,9 @@ if [string eq $replies ""] {
 }
 
 ad_returnredirect "forum?forum_id=$forum_id"
+
+# Local variables:
+#    mode: tcl
+#    tcl-indent-level: 4
+#    indent-tabs-mode: nil
+# End:
