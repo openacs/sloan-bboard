@@ -38,7 +38,7 @@ set user_id [ad_conn user_id]
 
 if [string eq $replies ""] {
     bboard_message_set_status -message_id $message_id -forum_id $forum_id \
-	    -status [db_null]
+	    -status ""
 } else {
     db_dml bboard_delete_threads {
 	delete from bboard_forum_message_map bfm
